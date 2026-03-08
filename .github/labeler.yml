@@ -1,0 +1,32 @@
+docs:
+  - docs/**
+  - '*.md'
+
+ci:
+  - .github/workflows/**
+  - .github/dependabot.yml
+
+python:
+  - '**/*.py'
+  - pyproject.toml
+  - uv.lock
+
+javascript:
+  - '**/*.ts'
+  - '**/*.js'
+  - package.json
+  - pnpm-lock.yaml
+
+llm-router:
+  - packages/llm-router/**
+
+forge-quality:
+  - packages/forge-quality/**
+
+lp-gen:
+  - packages/lp-gen/**
+
+chore:
+  - justfile
+  - .whitesource
+  - .github/dependabot.yml
