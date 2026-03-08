@@ -1,5 +1,9 @@
 # meta-code-squad
 
+## Activity
+
+![Alt](https://repobeats.axiom.co/api/embed/4ad87c297eafcf0cfb019c03aaec352652cf5a93.svg "Repobeats analytics image")
+
 Autonomous coding squad and meta-orchestration layer for Aigency.
 
 ## What This Is
