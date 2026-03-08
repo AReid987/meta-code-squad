@@ -1,0 +1,23 @@
+# Meta Code Squad — CODEOWNERS
+# These owners are automatically requested for review on PRs.
+
+# Global owner
+* @AReid987
+
+# Core docs and constitutions
+/AGENTS.md @AReid987
+/GEMINI.md @AReid987
+/CLAUDE.md @AReid987
+/docs/ @AReid987
+
+# CI/CD
+/.github/ @AReid987
+
+# LLM Router package
+/packages/llm-router/ @AReid987
+
+# Forge quality package
+/packages/forge-quality/ @AReid987
+
+# Landing page generator
+/packages/lp-gen/ @AReid987
