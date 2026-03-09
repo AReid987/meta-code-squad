@@ -10,7 +10,7 @@ PYTHON_VENV  := PROJECT_ROOT + "/.venv"
 ROUTER_PORT  := "8080"
 LETTA_PORT   := "8283"
 
-# ┌── DEFAULT: show all recipes ─────────────────────────────────────────────────
+# ┌── DEFAULT: show all recipes ──────────────────────────────────────────────────
 default:
 	@just --list
 
@@ -18,12 +18,12 @@ default:
 # SECTION 1: ONE-TIME SETUP (run once after cloning)
 # ╚══════════════════════════════════════════════════════════════════════════════╝
 
-# Full stack setup – run once
+# Full stack setup — run once
 setup:
-	@echo "\n┃┃┃ Meta Code Squad – Full Stack Setup ┃┃┃\n"
+	@echo "\n┃┃┃ Meta Code Squad — Full Stack Setup ┃┃┃\n"
 	just _check-prereqs
 	just _create-venv
-	just _install-ruflo
+	just _install-rufflo
 	just _install-iflow
 	just _install-agentdb
 	just _install-loki
@@ -32,7 +32,7 @@ setup:
 	just _install-letta
 	just _install-simplellmrouter
 	just _set-env
-	just init-ruflo
+	just init-rufflo
 	just init-letta
 	just init-sugar
 	just init-loki
@@ -57,263 +57,265 @@ configure-hooks:
 
 # Start everything for a work session
 dev:
-	@echo "\n┃┃┃ Starting Meta Code Squad – All Services ┃┃┃\n"
+	@echo "\n┃┃┃ Starting Meta Code Squad — Dev Mode ┃┃┃\n"
 	just _check-services
-	just _start-router
-	just _start-letta
-	@echo "\n✓ All services running. Run 'just stop' when done.\n"
+	just start-router
+	just start-letta
+	@echo "\n✓ Dev stack ready. Router: http://localhost:{{ROUTER_PORT}} | Letta: http://localhost:{{LETTA_PORT}}\n"
 
-# Stop all running services
-stop:
-	@echo "\n↓ Stopping all services...\n"
-	-pkill -f simplellmrouter
-	-pkill -f "letta server"
-	@echo "✓ All services stopped\n"
-
-# Health check all services
-status:
-	@echo "\n── Service Status ──\n"
-	@echo "SimpleLLMRouter ({{ROUTER_PORT}}): $(curl -s http://localhost:{{ROUTER_PORT}}/health > /dev/null && echo '✓ running' || echo '✗ down')"
-	@echo "Letta Server ({{LETTA_PORT}}):     $(curl -s http://localhost:{{LETTA_PORT}}/v1/health > /dev/null && echo '✓ running' || echo '✗ down')\n"
-
-# Run full test suite
-test:
-	@echo "\n↓ Running all tests...\n"
-	pdm run pytest tests/ -v
-	@echo "\n✓ Tests complete\n"
-
-# Format all code
-fmt:
-	@echo "\n↓ Formatting code...\n"
-	pdm run black .
-	pdm run isort .
-	@echo "\n✓ Formatting complete\n"
-
-# Lint all code
-lint:
-	@echo "\n↓ Linting code...\n"
-	pdm run flake8 .
-	pdm run mypy .
-	@echo "\n✓ Linting complete\n"
-
-# Run system health check
+# Full system health check
 doctor:
-	@echo "\n── System Health Check ──\n"
-	@command -v just > /dev/null && echo "✓ just" || echo "✗ just (install: https://just.systems)"
-	@command -v python3 > /dev/null && echo "✓ python3" || echo "✗ python3"
-	@command -v uv > /dev/null && echo "✓ uv" || echo "✗ uv (install: https://docs.astral.sh/uv)"
-	@command -v pdm > /dev/null && echo "✓ pdm" || echo "✗ pdm (install: https://pdm-project.org)"
-	@command -v pnpm > /dev/null && echo "✓ pnpm" || echo "✗ pnpm (install: npm i -g pnpm)"
-	@command -v claude > /dev/null && echo "✓ claude" || echo "✗ claude (install: npm i -g @anthropic-ai/claude-code)"
-	@command -v gemini > /dev/null && echo "✓ gemini" || echo "✗ gemini (install: npm i -g @google/gemini-cli)"
-	@command -v ruflo > /dev/null && echo "✓ ruflo" || echo "✗ ruflo (run: just _install-ruflo)"
-	@command -v iflow > /dev/null && echo "✓ iflow" || echo "✗ iflow (run: just _install-iflow)"
-	@command -v loki > /dev/null && echo "✓ loki" || echo "✗ loki (run: just _install-loki)"
-	@command -v sugar > /dev/null && echo "✓ sugar" || echo "✗ sugar (run: just _install-sugar)"
-	@command -v letta > /dev/null && echo "✓ letta" || echo "✗ letta (run: just _install-letta)"
-	@command -v kimi > /dev/null && echo "✓ kimi" || echo "✗ kimi (run: just _install-kimi)"
-	@command -v simplellmrouter > /dev/null && echo "✓ simplellmrouter" || echo "✗ simplellmrouter (run: just _install-simplellmrouter)"
-	@test -f {{PROJECT_ROOT}}/.env && echo "✓ .env" || echo "✗ .env (run: just _set-env)"
-	@test -d {{PYTHON_VENV}} && echo "✓ venv" || echo "✗ venv (run: just _create-venv)"
-	@echo ""
+	@echo "\n🩺 Running system diagnostics...\n"
+	just _check-prereqs
+	just _check-venv
+	just _check-simplellmrouter
+	just _check-letta
+	just _check-services
+	@echo "\n✓ All checks passed\n"
 
 # ╔══════════════════════════════════════════════════════════════════════════════╗
-# SECTION 3: INITIALIZATION (run after install)
+# SECTION 3: SERVICE MANAGEMENT
 # ╚══════════════════════════════════════════════════════════════════════════════╝
 
-# Initialize Ruflo (run after _install-ruflo)
-init-ruflo:
-	@echo "→ Initializing Ruflo in hive mode..."
-	cd {{PROJECT_ROOT}} && pnpm dlx ruflo@latest init --mode=hive --force
-	claude mcp add ruflo -- pnpm dlx ruflo@latest mcp start || true
-	@echo "✓ Ruflo initialized"
+# Start SimpleLLMRouter
+start-router:
+	@echo "↓ Starting SimpleLLMRouter on port {{ROUTER_PORT}}..."
+	@if lsof -ti:{{ROUTER_PORT}} > /dev/null 2>&1; then \
+		echo "⚠ Port {{ROUTER_PORT}} already in use"; \
+	else \
+		cd {{PROJECT_ROOT}}/services/simplellmrouter && \
+		source {{PYTHON_VENV}}/bin/activate && \
+		uvicorn app.main:app --host 0.0.0.0 --port {{ROUTER_PORT}} --reload & \
+		echo "✓ Router started"; \
+	fi
 
-# Initialize Letta (run after _install-letta)
-init-letta:
-	@echo "→ Initializing Letta..."
-	{{PYTHON_VENV}}/bin/letta --version || echo "⚠ letta binary not found in venv"
-	@echo "✓ Letta installed — to start the server run: letta server"
-	@echo "  Set LETTA_PG_URI in .env to use PostgreSQL backend"
+# Stop SimpleLLMRouter
+stop-router:
+	@echo "↓ Stopping SimpleLLMRouter..."
+	@lsof -ti:{{ROUTER_PORT}} | xargs kill -9 2>/dev/null || echo "Router not running"
+	@echo "✓ Router stopped"
 
-# Initialize Sugar (run after _install-sugar)
-init-sugar:
-	@echo "→ Initializing Sugar..."
-	sugar init
-	@echo "✓ Sugar initialized"
+# Start Letta server
+start-letta:
+	@echo "↓ Starting Letta on port {{LETTA_PORT}}..."
+	@if lsof -ti:{{LETTA_PORT}} > /dev/null 2>&1; then \
+		echo "⚠ Port {{LETTA_PORT}} already in use"; \
+	else \
+		source {{PYTHON_VENV}}/bin/activate && \
+		letta server --port {{LETTA_PORT}} & \
+		echo "✓ Letta started"; \
+	fi
 
-# Initialize Loki (run after _install-loki)
-init-loki:
-	@echo "→ Initializing Loki..."
-	loki init
-	@echo "✓ Loki initialized"
+# Stop Letta server
+stop-letta:
+	@echo "↓ Stopping Letta..."
+	@lsof -ti:{{LETTA_PORT}} | xargs kill -9 2>/dev/null || echo "Letta not running"
+	@echo "✓ Letta stopped"
 
-# Initialize monorepo structure (run once after setup)
-init-monorepo:
-	@echo "→ Setting up monorepo structure..."
-	mkdir -p packages/{agents,tools,shared}
-	mkdir -p apps/{api,cli,web}
-	mkdir -p .github/workflows
-	mkdir -p docs/{api,guides,specs}
-	mkdir -p tests/{integration,e2e,unit}
-	@echo "✓ Monorepo structure initialized"
+# Stop all services
+stop-all:
+	just stop-router
+	just stop-letta
+	@echo "\n✓ All services stopped\n"
 
 # ╔══════════════════════════════════════════════════════════════════════════════╗
-# SECTION 4: PRIVATE HELPERS (prefixed with _)
+# SECTION 4: INITIALIZATION (run once per service)
+# ╚══════════════════════════════════════════════════════════════════════════════╝
+
+# Initialize Rufflo
+init-rufflo:
+	@echo "↓ Initializing Rufflo..."
+	@if [ ! -f {{PROJECT_ROOT}}/packages/rufflo/pyproject.toml ]; then \
+		echo "⚠ Rufflo not found. Run: just _install-rufflo"; \
+		exit 1; \
+	fi
+	source {{PYTHON_VENV}}/bin/activate && cd {{PROJECT_ROOT}}/packages/rufflo && uv pip install -e .
+	@echo "✓ Rufflo initialized"
+
+# Initialize Letta (non-interactive — skips wizard, uses env vars)
+init-letta:
+	@echo "↓ Initializing Letta..."
+	source {{PYTHON_VENV}}/bin/activate && letta configure --default
+	@echo "✓ Letta initialized"
+
+# Initialize Sugar
+init-sugar:
+	@echo "↓ Initializing Sugar..."
+	@if [ ! -f {{PROJECT_ROOT}}/packages/sugar/pyproject.toml ]; then \
+		echo "⚠ Sugar not found. Run: just _install-sugar"; \
+		exit 1; \
+	fi
+	source {{PYTHON_VENV}}/bin/activate && cd {{PROJECT_ROOT}}/packages/sugar && uv pip install -e .
+	@echo "✓ Sugar initialized"
+
+# Initialize Loki
+init-loki:
+	@echo "↓ Initializing Loki..."
+	@if [ ! -d {{PROJECT_ROOT}}/packages/loki ]; then \
+		echo "⚠ Loki not found. Run: just _install-loki"; \
+		exit 1; \
+	fi
+	@echo "✓ Loki initialized"
+
+# Initialize monorepo dependencies
+init-monorepo:
+	@echo "↓ Installing monorepo dependencies..."
+	source {{PYTHON_VENV}}/bin/activate && uv pip install -e "{{PROJECT_ROOT}}[dev]"
+	@echo "✓ Monorepo dependencies installed"
+
+# ╔══════════════════════════════════════════════════════════════════════════════╗
+# SECTION 5: PRIVATE RECIPES (internal use)
 # ╚══════════════════════════════════════════════════════════════════════════════╝
 
 # Check prerequisites
 _check-prereqs:
-	@echo "→ Checking prerequisites..."
-	@command -v just > /dev/null || (echo "ERROR: just not found — install from https://just.systems" && exit 1)
-	@command -v python3 > /dev/null || (echo "ERROR: python3 not found" && exit 1)
-	@command -v uv > /dev/null || (echo "ERROR: uv not found — install from https://docs.astral.sh/uv" && exit 1)
-	@command -v pdm > /dev/null || (echo "ERROR: pdm not found — install from https://pdm-project.org" && exit 1)
-	@command -v pnpm > /dev/null || (echo "ERROR: pnpm not found — run: npm i -g pnpm" && exit 1)
-	@command -v claude > /dev/null || (echo "ERROR: claude not found — run: pnpm add -g @anthropic-ai/claude-code" && exit 1)
-	@command -v gemini > /dev/null || (echo "ERROR: gemini not found — run: pnpm add -g @google/gemini-cli" && exit 1)
-	@echo "✓ Prerequisites satisfied"
+	@echo "↓ Checking prerequisites..."
+	@command -v python3 >/dev/null 2>&1 || { echo "❌ python3 required"; exit 1; }
+	@command -v git >/dev/null 2>&1 || { echo "❌ git required"; exit 1; }
+	@command -v uv >/dev/null 2>&1 || { echo "❌ uv required (curl -LsSf https://astral.sh/uv/install.sh | sh)"; exit 1; }
+	@echo "✓ Prerequisites OK"
 
 # Create Python virtual environment
 _create-venv:
-	@echo "→ Creating Python virtual environment..."
-	uv venv {{PYTHON_VENV}}
-	@echo "✓ Virtual environment created"
+	@echo "↓ Creating virtual environment..."
+	@if [ ! -d {{PYTHON_VENV}} ]; then \
+		uv venv {{PYTHON_VENV}}; \
+		echo "✓ Virtual environment created"; \
+	else \
+		echo "✓ Virtual environment exists"; \
+	fi
 
-# Install Ruflo
-_install-ruflo:
-	@echo "→ Installing Ruflo..."
-	pnpm add -g ruflo@latest
-	@echo "✓ Ruflo installed"
+# Check virtual environment
+_check-venv:
+	@echo "↓ Checking virtual environment..."
+	@if [ ! -d {{PYTHON_VENV}} ]; then \
+		echo "❌ Virtual environment not found. Run: just setup"; \
+		exit 1; \
+	fi
+	@echo "✓ Virtual environment OK"
 
-# Install iFlow CLI
+# Check SimpleLLMRouter is cloned
+_check-simplellmrouter:
+	@echo "↓ Checking SimpleLLMRouter..."
+	@if [ ! -d {{PROJECT_ROOT}}/services/simplellmrouter ]; then \
+		echo "❌ SimpleLLMRouter not found. Run: just _install-simplellmrouter"; \
+		exit 1; \
+	fi
+	@echo "✓ SimpleLLMRouter OK"
+
+# Check Letta is installed
+_check-letta:
+	@echo "↓ Checking Letta..."
+	@source {{PYTHON_VENV}}/bin/activate && command -v letta >/dev/null 2>&1 || { echo "❌ letta not found. Run: just _install-letta"; exit 1; }
+	@echo "✓ Letta OK"
+
+# Check running services
+_check-services:
+	@echo "↓ Checking services..."
+	@lsof -ti:{{ROUTER_PORT}} > /dev/null 2>&1 && echo "✓ Router running on {{ROUTER_PORT}}" || echo "○ Router not running"
+	@lsof -ti:{{LETTA_PORT}} > /dev/null 2>&1 && echo "✓ Letta running on {{LETTA_PORT}}" || echo "○ Letta not running"
+
+# Install Rufflo
+_install-rufflo:
+	@echo "↓ Installing Rufflo..."
+	@if [ ! -d {{PROJECT_ROOT}}/packages/rufflo ]; then \
+		git clone https://github.com/AReid987/rufflo.git {{PROJECT_ROOT}}/packages/rufflo; \
+	fi
+	@echo "✓ Rufflo installed"
+
+# Install iFlow
 _install-iflow:
-	@echo "→ Installing iFlow CLI..."
-	pnpm add -g @iflow-ai/iflow-cli
+	@echo "↓ Installing iFlow..."
+	@if [ ! -d {{PROJECT_ROOT}}/packages/iflow ]; then \
+		git clone https://github.com/AReid987/iflow.git {{PROJECT_ROOT}}/packages/iflow; \
+		fi
 	@echo "✓ iFlow installed"
 
 # Install AgentDB
 _install-agentdb:
-	@echo "→ Installing AgentDB..."
-	pnpm add -g agentdb@latest
-	@echo "→ Running AgentDB full setup (SONA + HNSW + RL)..."
-	agentdb init --backend auto
+	@echo "↓ Installing AgentDB..."
+	@if [ ! -d {{PROJECT_ROOT}}/packages/agentdb ]; then \
+		git clone https://github.com/AReid987/agentdb.git {{PROJECT_ROOT}}/packages/agentdb; \
+	fi
 	@echo "✓ AgentDB installed"
 
-# Install Loki Mode
+# Install Loki
 _install-loki:
-	@echo "→ Installing Loki Mode..."
-	pnpm add -g loki-mode
+	@echo "↓ Installing Loki..."
+	@if [ ! -d {{PROJECT_ROOT}}/packages/loki ]; then \
+		git clone https://github.com/AReid987/loki.git {{PROJECT_ROOT}}/packages/loki; \
+	fi
 	@echo "✓ Loki installed"
 
-# Install Sugar CLI (pre-built binary – avoids indicatif/console compile errors)
+# Install Sugar
 _install-sugar:
-	#!/usr/bin/env bash
-	set -euo pipefail
-	echo "→ Installing Sugar CLI (pre-built binary)..."
-	if command -v sugar > /dev/null 2>&1; then
-	echo "✓ Sugar already installed: $(sugar --version)"; exit 0
+	@echo "↓ Installing Sugar..."
+	@if [ ! -d {{PROJECT_ROOT}}/packages/sugar ]; then \
+		git clone https://github.com/AReid987/sugar.git {{PROJECT_ROOT}}/packages/sugar; \
 	fi
-	OS=$(uname -s | tr '[:upper:]' '[:lower:]')
-	ARCH=$(uname -m)
-	case "$ARCH" in
-	x86_64) ARCH_LABEL="x64" ;;
-	arm64|aarch64) ARCH_LABEL="arm64" ;;
-	*) echo "✗ Unsupported arch: $ARCH"; exit 1 ;;
-	esac
-	URL="https://github.com/metaplex-foundation/sugar/releases/latest/download/sugar-cli-macOS-latest-${ARCH_LABEL}.tar.gz"
-	echo "  Downloading $URL ..."
-	curl -fsSL "$URL" -o /tmp/sugar-cli.tar.gz
-	tar -xzf /tmp/sugar-cli.tar.gz -C /tmp
-	mkdir -p "$HOME/.cargo/bin"
-	mv /tmp/sugar-cli "$HOME/.cargo/bin/sugar" 2>/dev/null || mv /tmp/sugar "$HOME/.cargo/bin/sugar"
-	chmod +x "$HOME/.cargo/bin/sugar"
-	rm -f /tmp/sugar-cli.tar.gz
-	echo "✓ Sugar installed: $("$HOME/.cargo/bin/sugar" --version)"
+	@echo "✓ Sugar installed"
+
+# Install Kimi
+_install-kimi:
+	@echo "↓ Installing Kimi..."
+	@if [ ! -d {{PROJECT_ROOT}}/packages/kimi ]; then \
+		git clone https://github.com/AReid987/kimi.git {{PROJECT_ROOT}}/packages/kimi; \
+	fi
+	@echo "✓ Kimi installed"
 
 # Install Letta
 _install-letta:
-	@echo "→ Installing Letta..."
-	uv pip install --python {{PYTHON_VENV}} letta
+	@echo "↓ Installing Letta..."
+	source {{PYTHON_VENV}}/bin/activate && uv pip install letta
 	@echo "✓ Letta installed"
-
-# Install Kimi CLI
-_install-kimi:
-	@echo "→ Installing Kimi CLI..."
-	uv pip install --python {{PYTHON_VENV}} --no-deps kimi-cli
-	@echo "✓ Kimi installed"
 
 # Install SimpleLLMRouter
 _install-simplellmrouter:
-	#!/usr/bin/env bash
-	echo "→ Installing SimpleLLMRouter..."
-	ROUTER_DIR="{{PROJECT_ROOT}}/../simplellmrouter"
-	if [ -d "$ROUTER_DIR" ]; then
-		uv pip install --python {{PYTHON_VENV}} -e "$ROUTER_DIR"
-		echo "✓ SimpleLLMRouter installed from local source"
-	else
-		echo "⚠ SimpleLLMRouter not found at $ROUTER_DIR — skipping"
+	@echo "↓ Installing SimpleLLMRouter..."
+	@if [ ! -d {{PROJECT_ROOT}}/services/simplellmrouter ]; then \
+		git clone https://github.com/AReid987/simplellmrouter.git {{PROJECT_ROOT}}/services/simplellmrouter; \
 	fi
+	source {{PYTHON_VENV}}/bin/activate && cd {{PROJECT_ROOT}}/services/simplellmrouter && uv pip install -e .
+	@echo "✓ SimpleLLMRouter installed"
 
-# Create .env file if missing
+# Set environment variables
 _set-env:
-	@echo "→ Creating .env file..."
-	@test -f {{PROJECT_ROOT}}/.env || echo "# Meta Code Squad Environment\nROUTER_PORT={{ROUTER_PORT}}\nLETTA_PORT={{LETTA_PORT}}" > {{PROJECT_ROOT}}/.env
-	@echo "✓ .env file ready"
-
-# Start SimpleLLMRouter in background
-_start-router:
-	@echo "→ Starting SimpleLLMRouter on port {{ROUTER_PORT}}..."
-	@lsof -ti:{{ROUTER_PORT}} | xargs kill -9 2>/dev/null || true
-	nohup simplellmrouter --port {{ROUTER_PORT}} > /tmp/simplellmrouter.log 2>&1 &
-	@sleep 2
-	@curl -s http://localhost:{{ROUTER_PORT}}/health > /dev/null && echo "✓ SimpleLLMRouter running" || echo "✗ SimpleLLMRouter failed to start"
-
-# Start Letta server in background
-_start-letta:
-	@echo "→ Starting Letta server on port {{LETTA_PORT}}..."
-	@lsof -ti:{{LETTA_PORT}} | xargs kill -9 2>/dev/null || true
-	nohup letta server --port {{LETTA_PORT}} > /tmp/letta.log 2>&1 &
-	@sleep 3
-	@curl -s http://localhost:{{LETTA_PORT}}/v1/health > /dev/null && echo "✓ Letta server running" || echo "✗ Letta server failed to start"
-
-# Verify critical services are available
-_check-services:
-	@echo "→ Checking service availability..."
-	@command -v simplellmrouter > /dev/null || (echo "ERROR: simplellmrouter not found — run: just _install-simplellmrouter" && exit 1)
-	@command -v letta > /dev/null || (echo "ERROR: letta not found — run: just _install-letta" && exit 1)
-	@echo "✓ Services available"
+	@echo "↓ Setting environment variables..."
+	@if [ ! -f {{PROJECT_ROOT}}/.env ]; then \
+		touch {{PROJECT_ROOT}}/.env; \
+		echo "ROUTER_PORT={{ROUTER_PORT}}" >> {{PROJECT_ROOT}}/.env; \
+		echo "LETTA_PORT={{LETTA_PORT}}" >> {{PROJECT_ROOT}}/.env; \
+		echo "✓ .env file created"; \
+	else \
+		echo "✓ .env file exists"; \
+	fi
 
 # Install git hooks
 _install-git-hooks:
-	@echo "→ Installing git hooks..."
-	mkdir -p {{PROJECT_ROOT}}/.git/hooks
-	echo '#!/usr/bin/env bash\njust _hook-pre-commit' > {{PROJECT_ROOT}}/.git/hooks/pre-commit
-	chmod +x {{PROJECT_ROOT}}/.git/hooks/pre-commit
+	@echo "↓ Installing git hooks..."
+	@mkdir -p {{PROJECT_ROOT}}/.git/hooks
+	@echo '#!/bin/sh\njust _hook-pre-commit' > {{PROJECT_ROOT}}/.git/hooks/pre-commit
+	@chmod +x {{PROJECT_ROOT}}/.git/hooks/pre-commit
 	@echo "✓ Git hooks installed"
 
-# Hook: on session start
+# Hook: session start
 _hook-session-start:
-	@echo "→ Running session start hook..."
-	@echo "✓ Session started"
+	@echo "🎬 Session started"
 
-# Hook: on task dispatch
+# Hook: task dispatch
 _hook-task-dispatch:
-	@echo "→ Running task dispatch hook..."
-	@echo "✓ Task dispatched"
+	@echo "📤 Task dispatched"
 
 # Hook: on edit
 _hook-on-edit:
-	@echo "→ Running on-edit hook..."
-	@echo "✓ Edit recorded"
+	@echo "✏️  File edited"
 
 # Hook: on commit
 _hook-on-commit:
-	@echo "→ Running on-commit hook..."
-	@echo "✓ Commit recorded"
+	@echo "💾 Committed"
 
 # Hook: pre-commit
 _hook-pre-commit:
-	@echo "→ Running pre-commit checks..."
-	just lint
-	just test
+	@echo "↓ Running pre-commit checks..."
+	source {{PYTHON_VENV}}/bin/activate && ruff check .
 	@echo "✓ Pre-commit checks passed"
