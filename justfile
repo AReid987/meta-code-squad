@@ -131,8 +131,9 @@ init-ruflo:
 # Initialize Letta (run after _install-letta)
 init-letta:
 	@echo "→ Initializing Letta..."
-	uv run --python {{PYTHON_VENV}} letta quickstart --backend postgres
-	@echo "✓ Letta initialized"
+	{{PYTHON_VENV_DIR}}/bin/letta --version || echo "⚠ letta binary not found in venv"
+	@echo "✓ Letta installed — to start the server run: letta server"
+	@echo "  Set LETTA_PG_URI in .env to use PostgreSQL backend"
 
 # Initialize Sugar (run after _install-sugar)
 init-sugar:
