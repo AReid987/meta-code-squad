@@ -226,7 +226,7 @@ _create-venv:
 
 _install-ruflo:
     @echo "→ Installing Ruflo (claude-flow)..."
-    npm install -g claude-flow@latest
+    npm install -g @anthropic-ai/claude-flow@latest
     @echo "✓ Ruflo installed"
 
 _install-iflow:
@@ -285,7 +285,7 @@ _set-env:
 init-ruflo:
     @echo "→ Initializing Ruflo in project..."
     cd {{PROJECT_ROOT}} && npx claude-flow@latest init --mode=hive
-    claude mcp add ruflo -- npx -y @anthropic-ai/claude-flow@latest mcp start
+    claude mcp add ruflo -- npx claude-flow@latest mcp start
     @echo "✓ Ruflo initialized + MCP registered"
 
 init-letta:
