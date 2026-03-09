@@ -194,7 +194,7 @@ _install-agentdb:
     @echo "→ Installing AgentDB..."
     pnpm add -g agentdb@latest
     @echo "→ Running AgentDB full setup (SONA + HNSW + RL)..."
-    agentdb install --full
+    agentdb init --backend auto
     @echo "✓ AgentDB installed"
 
 # Install Loki Mode
