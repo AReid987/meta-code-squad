@@ -7,7 +7,6 @@ set shell := ["zsh", "-cu"]
 
 PROJECT_ROOT := "/Users/antonioreid/CODE/00_PROJECTS/meta-code-squad"
 PYTHON_VENV  := PROJECT_ROOT + "/.venv"
-PYTHON       := PYTHON_VENV + "/bin/python"
 ROUTER_PORT  := "8080"
 LETTA_PORT   := "8283"
 
@@ -80,21 +79,21 @@ status:
 # Run full test suite
 test:
     @echo "\n↓ Running all tests...\n"
-    {{PYTHON}} -m pytest tests/ -v
+    pdm run pytest tests/ -v
     @echo "\n✓ Tests complete\n"
 
 # Format all code
 fmt:
     @echo "\n↓ Formatting code...\n"
-    {{PYTHON}} -m black .
-    {{PYTHON}} -m isort .
+    pdm run black .
+    pdm run isort .
     @echo "\n✓ Formatting complete\n"
 
 # Lint all code
 lint:
     @echo "\n↓ Linting code...\n"
-    {{PYTHON}} -m flake8 .
-    {{PYTHON}} -m mypy .
+    pdm run flake8 .
+    pdm run mypy .
     @echo "\n✓ Linting complete\n"
 
 # Run system health check
@@ -103,6 +102,7 @@ doctor:
     @command -v just > /dev/null && echo "✓ just" || echo "✗ just (install: https://just.systems)"
     @command -v python3 > /dev/null && echo "✓ python3" || echo "✗ python3"
     @command -v uv > /dev/null && echo "✓ uv" || echo "✗ uv (install: https://docs.astral.sh/uv)"
+    @command -v pdm > /dev/null && echo "✓ pdm" || echo "✗ pdm (install: https://pdm-project.org)"
     @command -v pnpm > /dev/null && echo "✓ pnpm" || echo "✗ pnpm (install: npm i -g pnpm)"
     @command -v claude > /dev/null && echo "✓ claude" || echo "✗ claude (install: npm i -g @anthropic-ai/claude-code)"
     @command -v gemini > /dev/null && echo "✓ gemini" || echo "✗ gemini (install: npm i -g @google/gemini-cli)"
@@ -166,6 +166,7 @@ _check-prereqs:
     @command -v just > /dev/null || (echo "ERROR: just not found — install from https://just.systems" && exit 1)
     @command -v python3 > /dev/null || (echo "ERROR: python3 not found" && exit 1)
     @command -v uv > /dev/null || (echo "ERROR: uv not found — install from https://docs.astral.sh/uv" && exit 1)
+    @command -v pdm > /dev/null || (echo "ERROR: pdm not found — install from https://pdm-project.org" && exit 1)
     @command -v pnpm > /dev/null || (echo "ERROR: pnpm not found — run: npm i -g pnpm" && exit 1)
     @command -v claude > /dev/null || (echo "ERROR: claude not found — run: pnpm add -g @anthropic-ai/claude-code" && exit 1)
     @command -v gemini > /dev/null || (echo "ERROR: gemini not found — run: pnpm add -g @google/gemini-cli" && exit 1)
