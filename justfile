@@ -178,7 +178,10 @@ restart:
 # Initialize rufflo agent
 init-rufflo:
 	@echo "↓ Initializing rufflo..."
-	cd {{PROJECT_ROOT}}/agents/rufflo && pnpm install
+	@if [ ! -d "{{PROJECT_ROOT}}/agents/rufflo" ]; then \
+		echo "  ↻ Creating rufflo agent directory..."; \
+		mkdir -p {{PROJECT_ROOT}}/agents/rufflo; \
+	fi
 	@echo "✓ Rufflo initialized"
 
 # Initialize letta agent (non-interactive)
