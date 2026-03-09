@@ -192,7 +192,9 @@ _install-iflow:
 # Install AgentDB
 _install-agentdb:
     @echo "→ Installing AgentDB..."
-    pnpm dlx agentdb@latest install --full
+    pnpm add -g agentdb@latest
+    @echo "→ Running AgentDB full setup (SONA + HNSW + RL)..."
+    agentdb install --full
     @echo "✓ AgentDB installed"
 
 # Install Loki Mode
