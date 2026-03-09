@@ -267,11 +267,12 @@ _install-letta:
 	uv pip install --python {{PYTHON_VENV}}/bin/python letta
 	@echo "✓ Letta installed"
 
-# Install simplellmrouter from local package
+# Clone and install simplellmrouter (TypeScript repo) into packages/
 _install-simplellmrouter:
 	@echo "→ Installing SimpleLLMRouter..."
-	@[ -d "{{PROJECT_ROOT}}/packages/simplellmrouter" ] || (echo "✗ packages/simplellmrouter not found — create it first" && exit 1)
-	uv pip install --python {{PYTHON_VENV}}/bin/python -e {{PROJECT_ROOT}}/packages/simplellmrouter
+	@[ -d "{{PROJECT_ROOT}}/packages/simplellmrouter" ] || \
+		git clone https://github.com/AReid987/simplellmrouter.git {{PROJECT_ROOT}}/packages/simplellmrouter
+	cd {{PROJECT_ROOT}}/packages/simplellmrouter && pnpm install
 	@echo "✓ SimpleLLMRouter installed"
 
 # Create .env file
