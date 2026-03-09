@@ -178,31 +178,26 @@ restart:
 # Initialize rufflo agent
 init-rufflo:
 	@echo "↓ Initializing rufflo..."
-	@if [ ! -d "{{PROJECT_ROOT}}/agents/rufflo" ]; then \
-		echo "  ↻ Creating rufflo agent directory..."; \
-		mkdir -p {{PROJECT_ROOT}}/agents/rufflo; \
-	fi
+	cd {{PROJECT_ROOT}}/agents/rufflo && pnpm install
 	@echo "✓ Rufflo initialized"
 
 # Initialize letta agent (non-interactive)
 init-letta:
 	@echo "↓ Initializing letta..."
-	#!/usr/bin/env zsh
-	source {{PYTHON_VENV}}/bin/activate
-	letta configure --default || true
+	{{PYTHON_VENV}}/bin/letta configure --default || true
 	@echo "✓ Letta initialized"
 
 # Initialize sugar TUI
 init-sugar:
 	@echo "↓ Initializing sugar..."
-	cd {{PROJECT_ROOT}}/agents/sugar && pnpm install
-	@echo "✓ Sugar initialized"
+	mkdir -p {{PROJECT_ROOT}}/agents/sugar
+	@echo "✓ Sugar directory ready (scaffold manually when needed)"
 
 # Initialize loki (logs aggregator)
 init-loki:
 	@echo "↓ Initializing loki..."
-	cd {{PROJECT_ROOT}}/agents/loki && pnpm install
-	@echo "✓ Loki initialized"
+	mkdir -p {{PROJECT_ROOT}}/agents/loki
+	@echo "✓ Loki directory ready (scaffold manually when needed)"
 
 # Initialize monorepo root dependencies
 init-monorepo:
