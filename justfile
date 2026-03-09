@@ -1,1 +1,292 @@
-IyBtZXRhLWNvZGUtc3F1YWQvanVzdGZpbGUKIyBSb290OiAvVXNlcnMvYW50b25pb3JlaWQvQ09ERS8wMF9QUk9KRUNUUy9tZXRhLWNvZGUtc3F1YWQKIyBSdW4gYGp1c3RgIHRvIHNlZSBhbGwgYXZhaWxhYmxlIHJlY2lwZXMKCnNldCBkb3RlbnYtbG9hZCA6PSB0cnVlCnNldCBzaGVsbCA6PSBbInpzaCIsICItY3UiXQoKUFJPSkVDVF9ST09UIDo9ICIvVXNlcnMvYW50b25pb3JlaWQvQ09ERS8wMF9QUk9KRUNUUy9tZXRhLWNvZGUtc3F1YWQiClBZVEhPTl9WRU5WICA6PSBQUk9KRUNUX1JPT1QgKyAiLy52ZW52IgpQWVRIT04gICAgICAgOj0gUFlUSE9OX1ZFTlYgKyAiL2Jpbi9weXRob24iClJPVVRFUl9QT1JUICA6PSAiODA4MCIKTEVUVEFfUE9SVCAgIDo9ICI4MjgzIgoKIyDilIzilIDilIAgREVGQVVMVDogc2hvdyBhbGwgcmVjaXBlcyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIAKZGVmYXVsdDoKICAgIEBqdXN0IC0tbGlzdAoKIyDilZTilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZcKIyBTRUNUSU9OIDE6IE9ORS1USU1FIFNFVFVQIChydW4gb25jZSBhZnRlciBjbG9uaW5nKQojIOKVmuKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVnQoKIyBGdWxsIHN0YWNrIHNldHVwIOKAkyBydW4gb25jZQpzZXR1cDoKICAgIEBlY2hvICJcbuKUg+KUg+KUgyBNZXRhIENvZGUgU3F1YWQg4oCTIEZ1bGwgU3RhY2sgU2V0dXAg4pSD4pSD4pSDXG4iCiAgICBqdXN0IF9jaGVjay1wcmVyZXFzCiAgICBqdXN0IF9jcmVhdGUtdmVudgogICAganVzdCBfaW5zdGFsbC1ydWZsbwogICAganVzdCBfaW5zdGFsbC1pZmxvdwogICAganVzdCBfaW5zdGFsbC1hZ2VudGRiCiAgICBqdXN0IF9pbnN0YWxsLWxva2kKICAgIGp1c3QgX2luc3RhbGwtc3VnYXIKICAgIGp1c3QgX2luc3RhbGwtbGV0dGEKICAgIGp1c3QgX2luc3RhbGwta2ltaQogICAganVzdCBfaW5zdGFsbC1zaW1wbGVsbG1yb3V0ZXIKICAgIGp1c3QgX3NldC1lbnYKICAgIGp1c3QgaW5pdC1ydWZsbwogICAganVzdCBpbml0LWxldHRhCiAgICBqdXN0IGluaXQtc3VnYXIKICAgIGp1c3QgaW5pdC1sb2tpCiAgICBqdXN0IGluaXQtbW9ub3JlcG8KICAgIGp1c3QgY29uZmlndXJlLWhvb2tzCiAgICBqdXN0IGRvY3RvcgogICAgQGVjaG8gIlxu4pyTIFNldHVwIGNvbXBsZXRlLiBSdW46IGp1c3QgZGV2XG4iCgojIFdpcmUgYWxsIGdpdCBob29rcyBhbmQgQ2xhdWRlIHNldHRpbmdzIChydW4gb25jZSBhZnRlciBzZXR1cCkKY29uZmlndXJlLWhvb2tzOgogICAgQGVjaG8gIuKGkyBXcml0aW5nIC5jbGF1ZGUvc2V0dGluZ3MuanNvbi4uLiIKICAgIG1rZGlyIC1wIHt7UFJPSkVDVF9ST09UfX0vLmNsYXVkZQogICAgZWNobyAne1xuICAiZW52Ijoge1xuICAgICJDTEFVREVfQ09ERV9FWFBFUklNRU5UQUxfQUdFTlRfVEVBTVMiOiAiMSIsXG4gICAgIlNJTVBMRUxMTVJPVVRFUl9VUkwiOiAiaHR0cDovL2xvY2FsaG9zdDp7e1JPVVRFUl9QT1JUfX0iLFxuICAgICJMRVRUQV9TRVJWRVIiOiAiaHR0cDovL2xvY2FsaG9zdDp7e0xFVFRBX1BPUlR9fSJcbiAgfSxcbiAgImhvb2tzIjoge1xuICAgICJvbl9zZXNzaW9uX3N0YXJ0IjogWyJqdXN0IF9ob29rLXNlc3Npb24tc3RhcnQiXSxcbiAgICAib25fdGFza19kaXNwYXRjaCI6IFsianVzdCBfaG9vay10YXNrLWRpc3BhdGNoIl0sXG4gICAgIm9uX2VkaXQiOiBbImp1c3QgX2hvb2stb24tZWRpdCJdLFxuICAgICJvbl9jb21taXQiOiBbImp1c3QgX2hvb2stb24tY29tbWl0Il1cbiAgfVxufScgPiB7e1BST0pFQ1RfUk9PVH19Ly5jbGF1ZGUvc2V0dGluZ3MuanNvbgogICAgQGVjaG8gIuKckyAuY2xhdWRlL3NldHRpbmdzLmpzb24gd3JpdHRlbiIKICAgIEBlY2hvICLihpMgSW5zdGFsbGluZyBnaXQgaG9va3MuLi4iCiAgICBqdXN0IF9pbnN0YWxsLWdpdC1ob29rcwogICAgQGVjaG8gIuKckyBIb29rcyBjb25maWd1cmVkIgoKIyDilZTilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZcKIyBTRUNUSU9OIDI6IERBSUxZIERSSVZFUiAocnVuIGV2ZXJ5IHNlc3Npb24pCiMg4pWa4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWdCgojIFN0YXJ0IGV2ZXJ5dGhpbmcgZm9yIGEgd29yayBzZXNzaW9uCmRldjoKICAgIEBlY2hvICJcbuKUg+KUg+KUgyBTdGFydGluZyBNZXRhIENvZGUgU3F1YWQg4oCTIEFsbCBTZXJ2aWNlcyDilIPilIPilINcbiIKICAgIGp1c3QgX2NoZWNrLXNlcnZpY2VzCiAgICBqdXN0IF9zdGFydC1yb3V0ZXIKICAgIGp1c3QgX3N0YXJ0LWxldHRhCiAgICBAZWNobyAiXG7inJMgQWxsIHNlcnZpY2VzIHJ1bm5pbmcuIFJ1biAnanVzdCBzdG9wJyB3aGVuIGRvbmUuXG4iCgojIFN0b3AgYWxsIHJ1bm5pbmcgc2VydmljZXMKc3RvcDoKICAgIEBlY2hvICJcbuKGkyBTdG9wcGluZyBhbGwgc2VydmljZXMuLi5cbiIKICAgIC1wa2lsbCAtZiBzaW1wbGVsbG1yb3V0ZXIKICAgIC1wa2lsbCAtZiAibGV0dGEgc2VydmVyIgogICAgQGVjaG8gIuKckyBBbGwgc2VydmljZXMgc3RvcHBlZFxuIgoKIyBIZWFsdGggY2hlY2sgYWxsIHNlcnZpY2VzCnN0YXR1czoKICAgIEBlY2hvICJcbuKUgOKUgCBTZXJ2aWNlIFN0YXR1cyDilIDilIBcbiIKICAgIEBlY2hvICJTaW1wbGVMTE1Sb3V0ZXIgKHt7Uk9VVEVSX1BPUlR9fSk6ICQoY3VybCAtcyBodHRwOi8vbG9jYWxob3N0Ont7Uk9VVEVSX1BPUlR9fS9oZWFsdGggPiAvZGV2L251bGwgJiYgZWNobyAn4pyTIHJ1bm5pbmcnIHx8IGVjaG8gJ+KclyBkb3duJykiCiAgICBAZWNobyAiTGV0dGEgU2VydmVyICh7e0xFVFRBX1BPUlR9fSk6ICAgICAkKGN1cmwgLXMgaHR0cDovL2xvY2FsaG9zdDp7e0xFVFRBX1BPUlR9fS92MS9oZWFsdGggPiAvZGV2L251bGwgJiYgZWNobyAn4pyTIHJ1bm5pbmcnIHx8IGVjaG8gJ+KclyBkb3duJylcbiIKCiMgUnVuIGZ1bGwgdGVzdCBzdWl0ZQp0ZXN0OgogICAgQGVjaG8gIlxu4oaTIFJ1bm5pbmcgYWxsIHRlc3RzLi4uXG4iCiAgICB7e1BZVEhPTn19IC1tIHB5dGVzdCB0ZXN0cy8gLXYKICAgIEBlY2hvICJcbuKckyBUZXN0cyBjb21wbGV0ZVxuIgoKIyBGb3JtYXQgYWxsIGNvZGUKZm10OgogICAgQGVjaG8gIlxu4oaTIEZvcm1hdHRpbmcgY29kZS4uLlxuIgogICAge3tQWVRIT059fSAtbSBibGFjayAuCiAgICB7e1BZVEhPTn19IC1tIGlzb3J0IC4KICAgIEBlY2hvICJcbuKckyBGb3JtYXR0aW5nIGNvbXBsZXRlXG4iCgojIExpbnQgYWxsIGNvZGUKbGludDoKICAgIEBlY2hvICJcbuKGkyBMaW50aW5nIGNvZGUuLi5cbiIKICAgIHt7UFlUSE9OfX0gLW0gZmxha2U4IC4KICAgIHt7UFlUSE9OfX0gLW0gbXlweSAuCiAgICBAZWNobyAiXG7inJMgTGludGluZyBjb21wbGV0ZVxuIgoKIyBSdW4gc3lzdGVtIGhlYWx0aCBjaGVjawpkb2N0b3I6CiAgICBAZWNobyAiXG7ilIDilIAgU3lzdGVtIEhlYWx0aCBDaGVjayDilIDilIBcbiIKICAgIEBjb21tYW5kIC12IGp1c3QgPiAvZGV2L251bGwgJiYgZWNobyAi4pyTIGp1c3QiIHx8IGVjaG8gIuKclyBqdXN0IChpbnN0YWxsOiBodHRwczovL2p1c3Quc3lzdGVtcykiCiAgICBAY29tbWFuZCAtdiBweXRob24zID4gL2Rldi9udWxsICYmIGVjaG8gIuKckyBweXRob24zIiB8fCBlY2hvICLinJcgcHl0aG9uMyIKICAgIEBjb21tYW5kIC12IHV2ID4gL2Rldi9udWxsICYmIGVjaG8gIuKckyB1diIgfHwgZWNobyAi4pyXIHV2IChpbnN0YWxsOiBodHRwczovL2RvY3MuYXN0cmFsLnNoL3V2KSIKICAgIEBjb21tYW5kIC12IHBucG0gPiAvZGV2L251bGwgJiYgZWNobyAi4pyTIHBucG0iIHx8IGVjaG8gIuKclyBwbnBtIChpbnN0YWxsOiBucG0gaSAtZyBwbnBtKSIKICAgIEBjb21tYW5kIC12IGNsYXVkZSA+IC9kZXYvbnVsbCAmJiBlY2hvICLinJMgY2xhdWRlIiB8fCBlY2hvICLinJcgY2xhdWRlIChpbnN0YWxsOiBucG0gaSAtZyBAYW50aHJvcGljLWFpL2NsYXVkZS1jb2RlKSIKICAgIEBjb21tYW5kIC12IGdlbWluaSA+IC9kZXYvbnVsbCAmJiBlY2hvICLinJMgZ2VtaW5pIiB8fCBlY2hvICLinJcgZ2VtaW5pIChpbnN0YWxsOiBucG0gaSAtZyBAZ29vZ2xlL2dlbWluaS1jbGkpIgogICAgQGNvbW1hbmQgLXYgcnVmbG8gPiAvZGV2L251bGwgJiYgZWNobyAi4pyTIHJ1ZmxvIiB8fCBlY2hvICLinJcgcnVmbG8gKHJ1bjoganVzdCBfaW5zdGFsbC1ydWZsbykiCiAgICBAY29tbWFuZCAtdiBpZmxvdyA+IC9kZXYvbnVsbCAmJiBlY2hvICLinJMgaWZsb3ciIHx8IGVjaG8gIuKclyBpZmxvdyAocnVuOiBqdXN0IF9pbnN0YWxsLWlmbG93KSIKICAgIEBjb21tYW5kIC12IGxva2kgPiAvZGV2L251bGwgJiYgZWNobyAi4pyTIGxva2kiIHx8IGVjaG8gIuKclyBsb2tpIChydW46IGp1c3QgX2luc3RhbGwtbG9raSkiCiAgICBAY29tbWFuZCAtdiBzdWdhciA+IC9kZXYvbnVsbCAmJiBlY2hvICLinJMgc3VnYXIiIHx8IGVjaG8gIuKclyBzdWdhciAocnVuOiBqdXN0IF9pbnN0YWxsLXN1Z2FyKSIKICAgIEBjb21tYW5kIC12IGxldHRhID4gL2Rldi9udWxsICYmIGVjaG8gIuKckyBsZXR0YSIgfHwgZWNobyAi4pyXIGxldHRhIChydW46IGp1c3QgX2luc3RhbGwtbGV0dGEpIgogICAgQGNvbW1hbmQgLXYga2ltaSA+IC9kZXYvbnVsbCAmJiBlY2hvICLinJMga2ltaSIgfHwgZWNobyAi4pyXIGtpbWkgKHJ1bjoganVzdCBfaW5zdGFsbC1raW1pKSIKICAgIEBjb21tYW5kIC12IHNpbXBsZWxsbXJvdXRlciA+IC9kZXYvbnVsbCAmJiBlY2hvICLinJMgc2ltcGxlbGxtcm91dGVyIiB8fCBlY2hvICLinJcgc2ltcGxlbGxtcm91dGVyIChydW46IGp1c3QgX2luc3RhbGwtc2ltcGxlbGxtcm91dGVyKSIKICAgIEB0ZXN0IC1mIHt7UFJPSkVDVF9ST09UfX0vLmVudiAmJiBlY2hvICLinJMgLmVudiIgfHwgZWNobyAi4pyXIC5lbnYgKHJ1bjoganVzdCBfc2V0LWVudikiCiAgICBAdGVzdCAtZCB7e1BZVEhPTl9WRU5WfX0gJiYgZWNobyAi4pyTIHZlbnYiIHx8IGVjaG8gIuKclyB2ZW52IChydW46IGp1c3QgX2NyZWF0ZS12ZW52KSIKICAgIEBlY2hvICIiCgojIOKVlOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVlwojIFNFQ1RJT04gMzogSU5JVElBTElaQVRJT04gKHJ1biBhZnRlciBpbnN0YWxsKQojIOKVmuKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVnQoKIyBJbml0aWFsaXplIFJ1ZmxvIChydW4gYWZ0ZXIgX2luc3RhbGwtcnVmbG8pCmluaXQtcnVmbG86CiAgICBAZWNobyAi4oaSIEluaXRpYWxpemluZyBSdWZsbyBpbiBoaXZlIG1vZGUuLi4iCiAgICBjZCB7e1BST0pFQ1RfUk9PVH19ICYmIHBucG0gZGx4IHJ1ZmxvQGxhdGVzdCBpbml0IC0tbW9kZT1oaXZlCiAgICBjbGF1ZGUgbWNwIGFkZCBydWZsbyAtLSBwbnBtIGRseCBydWZsb0BsYXRlc3QgbWNwIHN0YXJ0CiAgICBAZWNobyAi4pyTIFJ1ZmxvIGluaXRpYWxpemVkIgoKIyBJbml0aWFsaXplIExldHRhIChydW4gYWZ0ZXIgX2luc3RhbGwtbGV0dGEpCmluaXQtbGV0dGE6CiAgICBAZWNobyAi4oaSIEluaXRpYWxpemluZyBMZXR0YS4uLiIKICAgIGxldHRhIHF1aWNrc3RhcnQgLS1iYWNrZW5kIHBvc3RncmVzCiAgICBAZWNobyAi4pyTIExldHRhIGluaXRpYWxpemVkIgoKIyBJbml0aWFsaXplIFN1Z2FyIChydW4gYWZ0ZXIgX2luc3RhbGwtc3VnYXIpCmluaXQtc3VnYXI6CiAgICBAZWNobyAi4oaSIEluaXRpYWxpemluZyBTdWdhci4uLiIKICAgIHN1Z2FyIGluaXQKICAgIEBlY2hvICLinJMgU3VnYXIgaW5pdGlhbGl6ZWQiCgojIEluaXRpYWxpemUgTG9raSAocnVuIGFmdGVyIF9pbnN0YWxsLWxva2kpCmluaXQtbG9raToKICAgIEBlY2hvICLihpIgSW5pdGlhbGl6aW5nIExva2kuLi4iCiAgICBsb2tpIGluaXQKICAgIEBlY2hvICLinJMgTG9raSBpbml0aWFsaXplZCIKCiMgSW5pdGlhbGl6ZSBtb25vcmVwbyBzdHJ1Y3R1cmUgKHJ1biBvbmNlIGFmdGVyIHNldHVwKQppbml0LW1vbm9yZXBvOgogICAgQGVjaG8gIuKGkiBTZXR0aW5nIHVwIG1vbm9yZXBvIHN0cnVjdHVyZS4uLiIKICAgIG1rZGlyIC1wIHBhY2thZ2VzL3thZ2VudHMsdG9vbHMsc2hhcmVkfQogICAgbWtkaXIgLXAgYXBwcy97YXBpLGNsaSx3ZWJ9CiAgICBta2RpciAtcCAuZ2l0aHViL3dvcmtmbG93cwogICAgbWtkaXIgLXAgZG9jcy97YXBpLGd1aWRlcyxzcGVjc30KICAgIG1rZGlyIC1wIHRlc3RzL3tpbnRlZ3JhdGlvbixlMmUsdW5pdH0KICAgIEBlY2hvICLinJMgTW9ub3JlcG8gc3RydWN0dXJlIGluaXRpYWxpemVkIgoKIyDilZTilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZcKIyBTRUNUSU9OIDQ6IFBSSVZBVEUgSEVMUEVSUyAocHJlZml4ZWQgd2l0aCBfKQojIOKVmuKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVnQoKIyBDaGVjayBwcmVyZXF1aXNpdGVzCl9jaGVjay1wcmVyZXFzOgogICAgQGVjaG8gIuKGkiBDaGVja2luZyBwcmVyZXF1aXNpdGVzLi4uIgogICAgQGNvbW1hbmQgLXYganVzdCA+IC9kZXYvbnVsbCB8fCAoZWNobyAiRVJST1I6IGp1c3Qgbm90IGZvdW5kIOKAlCBpbnN0YWxsIGZyb20gaHR0cHM6Ly9qdXN0LnN5c3RlbXMiICYmIGV4aXQgMSkKICAgIEBjb21tYW5kIC12IHB5dGhvbjMgPiAvZGV2L251bGwgfHwgKGVjaG8gIkVSUk9SOiBweXRob24zIG5vdCBmb3VuZCIgJiYgZXhpdCAxKQogICAgQGNvbW1hbmQgLXYgdXYgPiAvZGV2L251bGwgfHwgKGVjaG8gIkVSUk9SOiB1diBub3QgZm91bmQg4oCUIGluc3RhbGwgZnJvbSBodHRwczovL2RvY3MuYXN0cmFsLnNoL3V2IiAmJiBleGl0IDEpCiAgICBAY29tbWFuZCAtdiBwbnBtID4gL2Rldi9udWxsIHx8IChlY2hvICJFUlJPUjogcG5wbSBub3QgZm91bmQg4oCUIHJ1bjogbnBtIGkgLWcgcG5wbSIgJiYgZXhpdCAxKQogICAgQGNvbW1hbmQgLXYgY2xhdWRlID4gL2Rldi9udWxsIHx8IChlY2hvICJFUlJPUjogY2xhdWRlIG5vdCBmb3VuZCDigJQgcnVuOiBwbnBtIGFkZCAtZyBAYW50aHJvcGljLWFpL2NsYXVkZS1jb2RlIiAmJiBleGl0IDEpCiAgICBAY29tbWFuZCAtdiBnZW1pbmkgPiAvZGV2L251bGwgfHwgKGVjaG8gIkVSUk9SOiBnZW1pbmkgbm90IGZvdW5kIOKAlCBydW46IHBucG0gYWRkIC1nIEBnb29nbGUvZ2VtaW5pLWNsaSIgJiYgZXhpdCAxKQogICAgQGVjaG8gIuKckyBQcmVyZXF1aXNpdGVzIHNhdGlzZmllZCIKCiMgQ3JlYXRlIFB5dGhvbiB2aXJ0dWFsIGVudmlyb25tZW50Cl9jcmVhdGUtdmVudjoKICAgIEBlY2hvICLihpIgQ3JlYXRpbmcgUHl0aG9uIHZpcnR1YWwgZW52aXJvbm1lbnQuLi4iCiAgICB1diB2ZW52IHt7UFlUSE9OX1ZFTlZ9fQogICAgQGVjaG8gIuKckyBWaXJ0dWFsIGVudmlyb25tZW50IGNyZWF0ZWQiCgojIEluc3RhbGwgUnVmbG8KX2luc3RhbGwtcnVmbG86CiAgICBAZWNobyAi4oaSIEluc3RhbGxpbmcgUnVmbG8uLi4iCiAgICBwbnBtIGFkZCAtZyBydWZsb0BsYXRlc3QKICAgIEBlY2hvICLinJMgUnVmbG8gaW5zdGFsbGVkIgoKIyBJbnN0YWxsIGlGbG93IENMSQpfaW5zdGFsbC1pZmxvdzoKICAgIEBlY2hvICLihpIgSW5zdGFsbGluZyBpRmxvdyBDTEkuLi4iCiAgICBwbnBtIGFkZCAtZyBAaWZsb3ctYWkvaWZsb3ctY2xpCiAgICBAZWNobyAi4pyTIGlGbG93IGluc3RhbGxlZCIKCiMgSW5zdGFsbCBBZ2VudERCCl9pbnN0YWxsLWFnZW50ZGI6CiAgICBAZWNobyAi4oaSIEluc3RhbGxpbmcgQWdlbnREQi4uLiIKICAgIHBucG0gYWRkIC1nIGFnZW50ZGJAbGF0ZXN0CiAgICBAZWNobyAi4oaSIFJ1bm5pbmcgQWdlbnREQiBmdWxsIHNldHVwIChTT05BICsgSE5TVyArIFJMKS4uLiIKICAgIGFnZW50ZGIgaW5pdCAtLWJhY2tlbmQgYXV0bwogICAgQGVjaG8gIuKckyBBZ2VudERCIGluc3RhbGxlZCIKCiMgSW5zdGFsbCBMb2tpIE1vZGUKX2luc3RhbGwtbG9raToKICAgIEBlY2hvICLihpIgSW5zdGFsbGluZyBMb2tpIE1vZGUuLi4iCiAgICBwbnBtIGFkZCAtZyBsb2tpLW1vZGUKICAgIEBlY2hvICLinJMgTG9raSBpbnN0YWxsZWQiCgojIEluc3RhbGwgU3VnYXIgQ0xJCl9pbnN0YWxsLXN1Z2FyOgogICAgQGVjaG8gIuKGkiBJbnN0YWxsaW5nIFN1Z2FyIENMSS4uLiIKICAgIGNhcmdvIGluc3RhbGwgc3VnYXItY2xpCiAgICBAZWNobyAi4pyTIFN1Z2FyIGluc3RhbGxlZCIKCiMgSW5zdGFsbCBMZXR0YQpfaW5zdGFsbC1sZXR0YToKICAgIEBlY2hvICLihpIgSW5zdGFsbGluZyBMZXR0YS4uLiIKICAgIHt7UFlUSE9OfX0gLW0gcGlwIGluc3RhbGwgbGV0dGEKICAgIEBlY2hvICLinJMgTGV0dGEgaW5zdGFsbGVkIgoKIyBJbnN0YWxsIEtpbWkgQ0xJCl9pbnN0YWxsLWtpbWk6CiAgICBAZWNobyAi4oaSIEluc3RhbGxpbmcgS2ltaSBDTEkuLi4iCiAgICB7e1BZVEhPTn19IC1tIHBpcCBpbnN0YWxsIGtpbWktY2xpCiAgICBAZWNobyAi4pyTIEtpbWkgaW5zdGFsbGVkIgoKIyBJbnN0YWxsIFNpbXBsZUxMTVJvdXRlcgpfaW5zdGFsbC1zaW1wbGVsbG1yb3V0ZXI6CiAgICBAZWNobyAi4oaSIEluc3RhbGxpbmcgU2ltcGxlTExNUm91dGVyLi4uIgogICAge3tQWVRIT059fSAtbSBwaXAgaW5zdGFsbCBzaW1wbGVsbG1yb3V0ZXIKICAgIEBlY2hvICLinJMgU2ltcGxlTExNUm91dGVyIGluc3RhbGxlZCIKCiMgQ3JlYXRlIC5lbnYgZmlsZSBpZiBtaXNzaW5nCl9zZXQtZW52OgogICAgQGVjaG8gIuKGkiBDcmVhdGluZyAuZW52IGZpbGUuLi4iCiAgICBAdGVzdCAtZiB7e1BST0pFQ1RfUk9PVH19Ly5lbnYgfHwgZWNobyAiIyBNZXRhIENvZGUgU3F1YWQgRW52aXJvbm1lbnRcblJPVVRFUl9QT1JUPXt7Uk9VVEVSX1BPUlR9fVxuTEVUVEFfUE9SVD17e0xFVFRBX1BPUlR9fSIgPiB7e1BST0pFQ1RfUk9PVH19Ly5lbnYKICAgIEBlY2hvICLinJMgLmVudiBmaWxlIHJlYWR5IgoKIyBTdGFydCBTaW1wbGVMTE1Sb3V0ZXIgaW4gYmFja2dyb3VuZApfc3RhcnQtcm91dGVyOgogICAgQGVjaG8gIuKGkiBTdGFydGluZyBTaW1wbGVMTE1Sb3V0ZXIgb24gcG9ydCB7e1JPVVRFUl9QT1JUfX0uLi4iCiAgICBAbHNvZiAtdGk6e3tST1VURVJfUE9SVH19IHwgeGFyZ3Mga2lsbCAtOSAyPi9kZXYvbnVsbCB8fCB0cnVlCiAgICBub2h1cCBzaW1wbGVsbG1yb3V0ZXIgLS1wb3J0IHt7Uk9VVEVSX1BPUlR9fSA+IC90bXAvc2ltcGxlbGxtcm91dGVyLmxvZyAyPiYxICYKICAgIEBzbGVlcCAyCiAgICBAY3VybCAtcyBodHRwOi8vbG9jYWxob3N0Ont7Uk9VVEVSX1BPUlR9fS9oZWFsdGggPiAvZGV2L251bGwgJiYgZWNobyAi4pyTIFNpbXBsZUxMTVJvdXRlciBydW5uaW5nIiB8fCBlY2hvICLinJcgU2ltcGxlTExNUm91dGVyIGZhaWxlZCB0byBzdGFydCIKCiMgU3RhcnQgTGV0dGEgc2VydmVyIGluIGJhY2tncm91bmQKX3N0YXJ0LWxldHRhOgogICAgQGVjaG8gIuKGkiBTdGFydGluZyBMZXR0YSBzZXJ2ZXIgb24gcG9ydCB7e0xFVFRBX1BPUlR9fS4uLiIKICAgIEBsc29mIC10aTp7e0xFVFRBX1BPUlR9fSB8IHhhcmdzIGtpbGwgLTkgMj4vZGV2L251bGwgfHwgdHJ1ZQogICAgbm9odXAgbGV0dGEgc2VydmVyIC0tcG9ydCB7e0xFVFRBX1BPUlR9fSA+IC90bXAvbGV0dGEubG9nIDI+JjEgJgogICAgQHNsZWVwIDMKICAgIEBjdXJsIC1zIGh0dHA6Ly9sb2NhbGhvc3Q6e3tMRVRUQV9QT1JUfX0vdjEvaGVhbHRoID4gL2Rldi9udWxsICYmIGVjaG8gIuKckyBMZXR0YSBzZXJ2ZXIgcnVubmluZyIgfHwgZWNobyAi4pyXIExldHRhIHNlcnZlciBmYWlsZWQgdG8gc3RhcnQiCgojIFZlcmlmeSBjcml0aWNhbCBzZXJ2aWNlcyBhcmUgYXZhaWxhYmxlCl9jaGVjay1zZXJ2aWNlczoKICAgIEBlY2hvICLihpIgQ2hlY2tpbmcgc2VydmljZSBhdmFpbGFiaWxpdHkuLi4iCiAgICBAY29tbWFuZCAtdiBzaW1wbGVsbG1yb3V0ZXIgPiAvZGV2L251bGwgfHwgKGVjaG8gIkVSUk9SOiBzaW1wbGVsbG1yb3V0ZXIgbm90IGZvdW5kIOKAlCBydW46IGp1c3QgX2luc3RhbGwtc2ltcGxlbGxtcm91dGVyIiAmJiBleGl0IDEpCiAgICBAY29tbWFuZCAtdiBsZXR0YSA+IC9kZXYvbnVsbCB8fCAoZWNobyAiRVJST1I6IGxldHRhIG5vdCBmb3VuZCDigJQgcnVuOiBqdXN0IF9pbnN0YWxsLWxldHRhIiAmJiBleGl0IDEpCiAgICBAZWNobyAi4pyTIFNlcnZpY2VzIGF2YWlsYWJsZSIKCiMgSW5zdGFsbCBnaXQgaG9va3MKX2luc3RhbGwtZ2l0LWhvb2tzOgogICAgQGVjaG8gIuKGkiBJbnN0YWxsaW5nIGdpdCBob29rcy4uLiIKICAgIG1rZGlyIC1wIHt7UFJPSkVDVF9ST09UfX0vLmdpdC9ob29rcwogICAgZWNobyAnIyEvdXNyL2Jpbi9lbnYgYmFzaFxuanVzdCBfaG9vay1wcmUtY29tbWl0JyA+IHt7UFJPSkVDVF9ST09UfX0vLmdpdC9ob29rcy9wcmUtY29tbWl0CiAgICBjaG1vZCAreCB7e1BST0pFQ1RfUk9PVH19Ly5naXQvaG9va3MvcHJlLWNvbW1pdAogICAgQGVjaG8gIuKckyBHaXQgaG9va3MgaW5zdGFsbGVkIgoKIyBIb29rOiBvbiBzZXNzaW9uIHN0YXJ0Cl9ob29rLXNlc3Npb24tc3RhcnQ6CiAgICBAZWNobyAi4oaSIFJ1bm5pbmcgc2Vzc2lvbiBzdGFydCBob29rLi4uIgogICAgQGVjaG8gIuKckyBTZXNzaW9uIHN0YXJ0ZWQiCgojIEhvb2s6IG9uIHRhc2sgZGlzcGF0Y2gKX2hvb2stdGFzay1kaXNwYXRjaDoKICAgIEBlY2hvICLihpIgUnVubmluZyB0YXNrIGRpc3BhdGNoIGhvb2suLi4iCiAgICBAZWNobyAi4pyTIFRhc2sgZGlzcGF0Y2hlZCIKCiMgSG9vazogb24gZWRpdApfaG9vay1vbi1lZGl0OgogICAgQGVjaG8gIuKGkiBSdW5uaW5nIG9uLWVkaXQgaG9vay4uLiIKICAgIEBlY2hvICLinJMgRWRpdCByZWNvcmRlZCIKCiMgSG9vazogb24gY29tbWl0Cl9ob29rLW9uLWNvbW1pdDoKICAgIEBlY2hvICLihpIgUnVubmluZyBvbi1jb21taXQgaG9vay4uLiIKICAgIEBlY2hvICLinJMgQ29tbWl0IHJlY29yZGVkIgoKIyBIb29rOiBwcmUtY29tbWl0Cl9ob29rLXByZS1jb21taXQ6CiAgICBAZWNobyAi4oaSIFJ1bm5pbmcgcHJlLWNvbW1pdCBjaGVja3MuLi4iCiAgICBqdXN0IGxpbnQKICAgIGp1c3QgdGVzdAogICAgQGVjaG8gIuKckyBQcmUtY29tbWl0IGNoZWNrcyBwYXNzZWQiCg==
+# meta-code-squad/justfile
+# Root: /Users/antonioreid/CODE/00_PROJECTS/meta-code-squad
+# Run `just` to see all available recipes
+
+set dotenv-load := true
+set shell := ["zsh", "-cu"]
+
+PROJECT_ROOT := "/Users/antonioreid/CODE/00_PROJECTS/meta-code-squad"
+PYTHON_VENV  := PROJECT_ROOT + "/.venv"
+PYTHON       := PYTHON_VENV + "/bin/python"
+ROUTER_PORT  := "8080"
+LETTA_PORT   := "8283"
+
+# ┌── DEFAULT: show all recipes ─────────────────────────────────────────────────
+default:
+    @just --list
+
+# ╔══════════════════════════════════════════════════════════════════════════════╗
+# SECTION 1: ONE-TIME SETUP (run once after cloning)
+# ╚══════════════════════════════════════════════════════════════════════════════╝
+
+# Full stack setup – run once
+setup:
+    @echo "\n┃┃┃ Meta Code Squad – Full Stack Setup ┃┃┃\n"
+    just _check-prereqs
+    just _create-venv
+    just _install-ruflo
+    just _install-iflow
+    just _install-agentdb
+    just _install-loki
+    just _install-sugar
+    just _install-letta
+    just _install-kimi
+    just _install-simplellmrouter
+    just _set-env
+    just init-ruflo
+    just init-letta
+    just init-sugar
+    just init-loki
+    just init-monorepo
+    just configure-hooks
+    just doctor
+    @echo "\n✓ Setup complete. Run: just dev\n"
+
+# Wire all git hooks and Claude settings (run once after setup)
+configure-hooks:
+    @echo "↓ Writing .claude/settings.json..."
+    mkdir -p {{PROJECT_ROOT}}/.claude
+    echo '{\n  "env": {\n    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",\n    "SIMPLELLMROUTER_URL": "http://localhost:{{ROUTER_PORT}}",\n    "LETTA_SERVER": "http://localhost:{{LETTA_PORT}}"\n  },\n  "hooks": {\n    "on_session_start": ["just _hook-session-start"],\n    "on_task_dispatch": ["just _hook-task-dispatch"],\n    "on_edit": ["just _hook-on-edit"],\n    "on_commit": ["just _hook-on-commit"]\n  }\n}' > {{PROJECT_ROOT}}/.claude/settings.json
+    @echo "✓ .claude/settings.json written"
+    @echo "↓ Installing git hooks..."
+    just _install-git-hooks
+    @echo "✓ Hooks configured"
+
+# ╔══════════════════════════════════════════════════════════════════════════════╗
+# SECTION 2: DAILY DRIVER (run every session)
+# ╚══════════════════════════════════════════════════════════════════════════════╝
+
+# Start everything for a work session
+dev:
+    @echo "\n┃┃┃ Starting Meta Code Squad – All Services ┃┃┃\n"
+    just _check-services
+    just _start-router
+    just _start-letta
+    @echo "\n✓ All services running. Run 'just stop' when done.\n"
+
+# Stop all running services
+stop:
+    @echo "\n↓ Stopping all services...\n"
+    -pkill -f simplellmrouter
+    -pkill -f "letta server"
+    @echo "✓ All services stopped\n"
+
+# Health check all services
+status:
+    @echo "\n── Service Status ──\n"
+    @echo "SimpleLLMRouter ({{ROUTER_PORT}}): $(curl -s http://localhost:{{ROUTER_PORT}}/health > /dev/null && echo '✓ running' || echo '✗ down')"
+    @echo "Letta Server ({{LETTA_PORT}}):     $(curl -s http://localhost:{{LETTA_PORT}}/v1/health > /dev/null && echo '✓ running' || echo '✗ down')\n"
+
+# Run full test suite
+test:
+    @echo "\n↓ Running all tests...\n"
+    {{PYTHON}} -m pytest tests/ -v
+    @echo "\n✓ Tests complete\n"
+
+# Format all code
+fmt:
+    @echo "\n↓ Formatting code...\n"
+    {{PYTHON}} -m black .
+    {{PYTHON}} -m isort .
+    @echo "\n✓ Formatting complete\n"
+
+# Lint all code
+lint:
+    @echo "\n↓ Linting code...\n"
+    {{PYTHON}} -m flake8 .
+    {{PYTHON}} -m mypy .
+    @echo "\n✓ Linting complete\n"
+
+# Run system health check
+doctor:
+    @echo "\n── System Health Check ──\n"
+    @command -v just > /dev/null && echo "✓ just" || echo "✗ just (install: https://just.systems)"
+    @command -v python3 > /dev/null && echo "✓ python3" || echo "✗ python3"
+    @command -v uv > /dev/null && echo "✓ uv" || echo "✗ uv (install: https://docs.astral.sh/uv)"
+    @command -v pnpm > /dev/null && echo "✓ pnpm" || echo "✗ pnpm (install: npm i -g pnpm)"
+    @command -v claude > /dev/null && echo "✓ claude" || echo "✗ claude (install: npm i -g @anthropic-ai/claude-code)"
+    @command -v gemini > /dev/null && echo "✓ gemini" || echo "✗ gemini (install: npm i -g @google/gemini-cli)"
+    @command -v ruflo > /dev/null && echo "✓ ruflo" || echo "✗ ruflo (run: just _install-ruflo)"
+    @command -v iflow > /dev/null && echo "✓ iflow" || echo "✗ iflow (run: just _install-iflow)"
+    @command -v loki > /dev/null && echo "✓ loki" || echo "✗ loki (run: just _install-loki)"
+    @command -v sugar > /dev/null && echo "✓ sugar" || echo "✗ sugar (run: just _install-sugar)"
+    @command -v letta > /dev/null && echo "✓ letta" || echo "✗ letta (run: just _install-letta)"
+    @command -v kimi > /dev/null && echo "✓ kimi" || echo "✗ kimi (run: just _install-kimi)"
+    @command -v simplellmrouter > /dev/null && echo "✓ simplellmrouter" || echo "✗ simplellmrouter (run: just _install-simplellmrouter)"
+    @test -f {{PROJECT_ROOT}}/.env && echo "✓ .env" || echo "✗ .env (run: just _set-env)"
+    @test -d {{PYTHON_VENV}} && echo "✓ venv" || echo "✗ venv (run: just _create-venv)"
+    @echo ""
+
+# ╔══════════════════════════════════════════════════════════════════════════════╗
+# SECTION 3: INITIALIZATION (run after install)
+# ╚══════════════════════════════════════════════════════════════════════════════╝
+
+# Initialize Ruflo (run after _install-ruflo)
+init-ruflo:
+    @echo "→ Initializing Ruflo in hive mode..."
+    cd {{PROJECT_ROOT}} && pnpm dlx ruflo@latest init --mode=hive
+    claude mcp add ruflo -- pnpm dlx ruflo@latest mcp start
+    @echo "✓ Ruflo initialized"
+
+# Initialize Letta (run after _install-letta)
+init-letta:
+    @echo "→ Initializing Letta..."
+    letta quickstart --backend postgres
+    @echo "✓ Letta initialized"
+
+# Initialize Sugar (run after _install-sugar)
+init-sugar:
+    @echo "→ Initializing Sugar..."
+    sugar init
+    @echo "✓ Sugar initialized"
+
+# Initialize Loki (run after _install-loki)
+init-loki:
+    @echo "→ Initializing Loki..."
+    loki init
+    @echo "✓ Loki initialized"
+
+# Initialize monorepo structure (run once after setup)
+init-monorepo:
+    @echo "→ Setting up monorepo structure..."
+    mkdir -p packages/{agents,tools,shared}
+    mkdir -p apps/{api,cli,web}
+    mkdir -p .github/workflows
+    mkdir -p docs/{api,guides,specs}
+    mkdir -p tests/{integration,e2e,unit}
+    @echo "✓ Monorepo structure initialized"
+
+# ╔══════════════════════════════════════════════════════════════════════════════╗
+# SECTION 4: PRIVATE HELPERS (prefixed with _)
+# ╚══════════════════════════════════════════════════════════════════════════════╝
+
+# Check prerequisites
+_check-prereqs:
+    @echo "→ Checking prerequisites..."
+    @command -v just > /dev/null || (echo "ERROR: just not found — install from https://just.systems" && exit 1)
+    @command -v python3 > /dev/null || (echo "ERROR: python3 not found" && exit 1)
+    @command -v uv > /dev/null || (echo "ERROR: uv not found — install from https://docs.astral.sh/uv" && exit 1)
+    @command -v pnpm > /dev/null || (echo "ERROR: pnpm not found — run: npm i -g pnpm" && exit 1)
+    @command -v claude > /dev/null || (echo "ERROR: claude not found — run: pnpm add -g @anthropic-ai/claude-code" && exit 1)
+    @command -v gemini > /dev/null || (echo "ERROR: gemini not found — run: pnpm add -g @google/gemini-cli" && exit 1)
+    @echo "✓ Prerequisites satisfied"
+
+# Create Python virtual environment
+_create-venv:
+    @echo "→ Creating Python virtual environment..."
+    uv venv {{PYTHON_VENV}}
+    @echo "✓ Virtual environment created"
+
+# Install Ruflo
+_install-ruflo:
+    @echo "→ Installing Ruflo..."
+    pnpm add -g ruflo@latest
+    @echo "✓ Ruflo installed"
+
+# Install iFlow CLI
+_install-iflow:
+    @echo "→ Installing iFlow CLI..."
+    pnpm add -g @iflow-ai/iflow-cli
+    @echo "✓ iFlow installed"
+
+# Install AgentDB
+_install-agentdb:
+    @echo "→ Installing AgentDB..."
+    pnpm add -g agentdb@latest
+    @echo "→ Running AgentDB full setup (SONA + HNSW + RL)..."
+    agentdb init --backend auto
+    @echo "✓ AgentDB installed"
+
+# Install Loki Mode
+_install-loki:
+    @echo "→ Installing Loki Mode..."
+    pnpm add -g loki-mode
+    @echo "✓ Loki installed"
+
+# Install Sugar CLI
+_install-sugar:
+    @echo "→ Installing Sugar CLI..."
+    cargo install sugar-cli
+    @echo "✓ Sugar installed"
+
+# Install Letta
+_install-letta:
+    @echo "→ Installing Letta..."
+    uv pip install --python {{PYTHON_VENV}} letta
+    @echo "✓ Letta installed"
+
+# Install Kimi CLI
+_install-kimi:
+    @echo "→ Installing Kimi CLI..."
+    uv pip install --python {{PYTHON_VENV}} kimi-cli
+    @echo "✓ Kimi installed"
+
+# Install SimpleLLMRouter
+_install-simplellmrouter:
+    @echo "→ Installing SimpleLLMRouter..."
+    uv pip install --python {{PYTHON_VENV}} simplellmrouter
+    @echo "✓ SimpleLLMRouter installed"
+
+# Create .env file if missing
+_set-env:
+    @echo "→ Creating .env file..."
+    @test -f {{PROJECT_ROOT}}/.env || echo "# Meta Code Squad Environment\nROUTER_PORT={{ROUTER_PORT}}\nLETTA_PORT={{LETTA_PORT}}" > {{PROJECT_ROOT}}/.env
+    @echo "✓ .env file ready"
+
+# Start SimpleLLMRouter in background
+_start-router:
+    @echo "→ Starting SimpleLLMRouter on port {{ROUTER_PORT}}..."
+    @lsof -ti:{{ROUTER_PORT}} | xargs kill -9 2>/dev/null || true
+    nohup simplellmrouter --port {{ROUTER_PORT}} > /tmp/simplellmrouter.log 2>&1 &
+    @sleep 2
+    @curl -s http://localhost:{{ROUTER_PORT}}/health > /dev/null && echo "✓ SimpleLLMRouter running" || echo "✗ SimpleLLMRouter failed to start"
+
+# Start Letta server in background
+_start-letta:
+    @echo "→ Starting Letta server on port {{LETTA_PORT}}..."
+    @lsof -ti:{{LETTA_PORT}} | xargs kill -9 2>/dev/null || true
+    nohup letta server --port {{LETTA_PORT}} > /tmp/letta.log 2>&1 &
+    @sleep 3
+    @curl -s http://localhost:{{LETTA_PORT}}/v1/health > /dev/null && echo "✓ Letta server running" || echo "✗ Letta server failed to start"
+
+# Verify critical services are available
+_check-services:
+    @echo "→ Checking service availability..."
+    @command -v simplellmrouter > /dev/null || (echo "ERROR: simplellmrouter not found — run: just _install-simplellmrouter" && exit 1)
+    @command -v letta > /dev/null || (echo "ERROR: letta not found — run: just _install-letta" && exit 1)
+    @echo "✓ Services available"
+
+# Install git hooks
+_install-git-hooks:
+    @echo "→ Installing git hooks..."
+    mkdir -p {{PROJECT_ROOT}}/.git/hooks
+    echo '#!/usr/bin/env bash\njust _hook-pre-commit' > {{PROJECT_ROOT}}/.git/hooks/pre-commit
+    chmod +x {{PROJECT_ROOT}}/.git/hooks/pre-commit
+    @echo "✓ Git hooks installed"
+
+# Hook: on session start
+_hook-session-start:
+    @echo "→ Running session start hook..."
+    @echo "✓ Session started"
+
+# Hook: on task dispatch
+_hook-task-dispatch:
+    @echo "→ Running task dispatch hook..."
+    @echo "✓ Task dispatched"
+
+# Hook: on edit
+_hook-on-edit:
+    @echo "→ Running on-edit hook..."
+    @echo "✓ Edit recorded"
+
+# Hook: on commit
+_hook-on-commit:
+    @echo "→ Running on-commit hook..."
+    @echo "✓ Commit recorded"
+
+# Hook: pre-commit
+_hook-pre-commit:
+    @echo "→ Running pre-commit checks..."
+    just lint
+    just test
+    @echo "✓ Pre-commit checks passed"
