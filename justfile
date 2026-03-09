@@ -272,7 +272,11 @@ _install-simplellmrouter:
 	@echo "→ Installing SimpleLLMRouter..."
 	@[ -d "{{PROJECT_ROOT}}/packages/simplellmrouter" ] || \
 		git clone https://github.com/AReid987/simplellmrouter.git {{PROJECT_ROOT}}/packages/simplellmrouter
-	cd {{PROJECT_ROOT}}/packages/simplellmrouter && pnpm install --ignore-workspace
+	@# Patch pnpm-workspace.yaml if it has no packages field (pnpm requires it)
+	@if [ -f "{{PROJECT_ROOT}}/packages/simplellmrouter/pnpm-workspace.yaml" ] && ! grep -q "^packages:" "{{PROJECT_ROOT}}/packages/simplellmrouter/pnpm-workspace.yaml"; then \
+		echo "packages:\n  - '.'" >> {{PROJECT_ROOT}}/packages/simplellmrouter/pnpm-workspace.yaml; \
+	fi
+	cd {{PROJECT_ROOT}}/packages/simplellmrouter && pnpm install
 	@echo "✓ SimpleLLMRouter installed"
 
 # Create .env file
