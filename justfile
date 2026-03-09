@@ -256,14 +256,10 @@ _check-prereqs:
 
 # Create Python virtual environment
 _create-venv:
-	@echo "→ Creating Python venv (Python 3.12)..."
-	@if [ -d "{{PYTHON_VENV}}" ] && {{PYTHON_VENV}}/bin/python --version 2>&1 | grep -q "3\.12"; then \
-		echo "  ✓ Virtual environment exists (Python 3.12)"; \
-	else \
-		echo "  ↻ Creating venv with Python 3.12..."; \
-		rm -rf {{PYTHON_VENV}}; \
-		uv venv {{PYTHON_VENV}} --python 3.12 && echo "  ✓ Virtual environment created (Python 3.12)"; \
-	fi
+	@echo "→ Creating Python venv..."
+	@[ -d "{{PYTHON_VENV}}" ] && echo "  ✓ Virtual environment exists"
+	uv venv {{PYTHON_VENV}}
+	@echo "✓ venv created"
 
 # Install letta
 _install-letta:
@@ -273,18 +269,14 @@ _install-letta:
 
 # Install simplellmrouter from local package
 _install-simplellmrouter:
-	@echo "→ Installing SimpleLLMRouter..."
-	@[ -d "{{PROJECT_ROOT}}/packages/simplellmrouter" ] || (echo "✗ packages/simplellmrouter not found — create it first" && exit 1)
-	uv pip install --python {{PYTHON_VENV}}/bin/python -e {{PROJECT_ROOT}}/packages/simplellmrouter
-	@echo "✓ SimpleLLMRouter installed"
+	@echo "→ Installing SimpleLLMRouter dependencies..."
+	cd {{PROJECT_ROOT}}/packages/simplellmrouter && pnpm install
+	@echo "✓ SimpleLLMRouter dependencies installed"
 
 # Create .env file
 _set-env:
-	@if [ -f "{{PROJECT_ROOT}}/.env" ]; then \
-		echo "✓ .env already exists"; \
-	else \
-		printf '# Meta Code Squad — Environment Variables\n# SimpleLLMRouter v2 Free-tier providers\nMISTRAL_API_KEY=\nGROQ_API_KEY=\nGEMINI_API_KEY=\nCEREBRAS_API_KEY=\nHYPERBOLIC_API_KEY=\nOPENROUTER_API_KEY=\nVOIDAI_API_KEY=\nZAI_API_KEY=\nKIMI_API_KEY=\n# Optional premium fallback\nCLAUDE_API_KEY=\nOPENAI_API_KEY=\n# Letta\nLETTA_SERVER_URL=http://localhost:8283\n# Redis (optional)\nREDIS_URL=redis://localhost:6379\n' > {{PROJECT_ROOT}}/.env && echo "✓ .env created — fill in your API keys"; \
-	fi
+	@echo "↓ Creating .env file..."
+	@[ -f ".env" ] && echo "✓ .env already exists" || cp .env.example .env
 
 # Install git hooks
 _install-git-hooks:
