@@ -244,14 +244,12 @@ _install-kimi:
 # Install SimpleLLMRouter
 _install-simplellmrouter:
 	@echo "→ Installing SimpleLLMRouter..."
-	#!/usr/bin/env zsh
-	ROUTER_DIR="{{PROJECT_ROOT}}/../simplellmrouter"
-	if [[ -d "$ROUTER_DIR" ]]; then
-	uv pip install --python {{PYTHON_VENV}} -e "$ROUTER_DIR"
-	echo "✓ SimpleLLMRouter installed from local source"
-	else
-	echo "⚠ SimpleLLMRouter source not found at $ROUTER_DIR — skipping (clone it to enable)"
-	fi
+	@ROUTER_DIR="{{PROJECT_ROOT}}/../simplellmrouter"; \
+		if [ -d "$$ROUTER_DIR" ]; then \
+			uv pip install --python {{PYTHON_VENV}} -e "$$ROUTER_DIR" && echo "✓ SimpleLLMRouter installed from local source"; \
+		else \
+			echo "⚠ SimpleLLMRouter not found at $$ROUTER_DIR — skipping"; \
+		fi
 
 # Create .env file if missing
 _set-env:
