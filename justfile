@@ -226,7 +226,7 @@ _create-venv:
 
 _install-ruflo:
     @echo "→ Installing Ruflo (claude-flow)..."
-    npm install -g @anthropic-ai/claude-flow@latest
+    npm install -g claude-flow@latest
     @echo "✓ Ruflo installed"
 
 _install-iflow:
