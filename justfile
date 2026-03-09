@@ -225,8 +225,8 @@ _create-venv:
     @echo "✓ Venv at {{PYTHON_VENV}}"
 
 _install-ruflo:
-    @echo "→ Installing Ruflo (claude-flow)..."
-    npm install -g @anthropic-ai/claude-flow@latest
+    @echo "→ Installing Ruflo..."
+    npm install -g ruflo@latest
     @echo "✓ Ruflo installed"
 
 _install-iflow:
@@ -256,10 +256,8 @@ _install-letta:
 
 _install-kimi:
     @echo "→ Installing Kimi Code CLI..."
-    @command -v kimi > /dev/null && echo "✓ Kimi CLI already installed — skipping" || \
-        (command -v uv > /dev/null && uv tool install --python 3.13 kimi-cli || \
-        curl -LsSf https://code.kimi.com/install.sh | bash)
-    @echo "✓ Kimi CLI install complete"
+    npm install -g @moonshot-ai/kimi-code-cli || npm install -g kimi-code || echo "WARN: Kimi CLI not available via npm — install manually from https://kimi.moonshot.cn/cli"
+    @echo "✓ Kimi CLI install attempted"
 
 _install-simplellmrouter:
     @echo "→ Copying SimpleLLMRouter v2 into packages/llm-router..."
@@ -286,8 +284,8 @@ _set-env:
 
 init-ruflo:
     @echo "→ Initializing Ruflo in project..."
-    cd {{PROJECT_ROOT}} && npx claude-flow@latest init --mode=hive
-    claude mcp add ruflo -- npx -y @anthropic-ai/claude-flow@latest mcp start
+    cd {{PROJECT_ROOT}} && npx ruflo@latest init --mode=hive
+    claude mcp add ruflo -- npx -y ruflo@latest mcp start
     @echo "✓ Ruflo initialized + MCP registered"
 
 init-letta:
