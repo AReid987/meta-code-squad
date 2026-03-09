@@ -10,13 +10,13 @@ PYTHON_VENV  := PROJECT_ROOT + "/.venv"
 ROUTER_PORT  := "8080"
 LETTA_PORT   := "8283"
 
-# ┌── DEFAULT: show all recipes ──────────────────────────────────────────────────
+# ┌── DEFAULT: show all recipes ────────────────────────────────────────────────────
 default:
 	@just --list
 
-# ╔══════════════════════════════════════════════════════════════════════════════╗
+# ╔════════════════════════════════════════════════════════════════════════════╗
 # SECTION 1: ONE-TIME SETUP (run once after cloning)
-# ╚══════════════════════════════════════════════════════════════════════════════╝
+# ╚════════════════════════════════════════════════════════════════════════════╝
 
 # Full stack setup — run once
 setup:
@@ -45,198 +45,290 @@ configure-hooks:
 	just _install-git-hooks
 	@echo "✓ Hooks configured"
 
-# ╔══════════════════════════════════════════════════════════════════════════════╗
+# ╔════════════════════════════════════════════════════════════════════════════╗
 # SECTION 2: DAILY DRIVER (run every session)
-# ╚══════════════════════════════════════════════════════════════════════════════╝
+# ╚════════════════════════════════════════════════════════════════════════════╝
 
 # Start everything for a work session
 dev:
 	@echo "\n┃┃┃ Meta Code Squad — Starting Dev Environment ┃┃┃\n"
 	just doctor
 	@echo "↓ Starting core services..."
-	just start-router &
-	just start-letta &
-	@echo "\n✓ Environment live. Happy coding!\n"
+	just start-router
+	just start-letta
+	@echo "↓ Starting agent UIs..."
+	just start-rufflo
+	just start-sugar
+	@echo "✓ All systems operational. Run: just status\n"
 
-# ╔══════════════════════════════════════════════════════════════════════════════╗
-# SECTION 3: INDIVIDUAL SERVICES
-# ╚══════════════════════════════════════════════════════════════════════════════╝
+# Quick health check
+status:
+	@echo "═══ Service Status ═══"
+	@just _status-router
+	@just _status-letta
+	@just _status-rufflo
+	@just _status-sugar
+	@echo ""
 
-# Start SimpleLLMRouter on port 8080
-start-router:
-	@echo "↓ Starting SimpleLLMRouter on :{{ROUTER_PORT}}..."
-	cd {{PROJECT_ROOT}}/packages/simplellmrouter && \
-	  {{PYTHON_VENV}}/bin/python router.py
-
-# Start Letta server on port 8283
-start-letta:
-	@echo "↓ Starting Letta on :{{LETTA_PORT}}..."
-	{{PYTHON_VENV}}/bin/letta server --port {{LETTA_PORT}}
-
-# Open Rufflo UI in browser
-rufflo:
-	@echo "↓ Opening Rufflo UI..."
-	open http://localhost:3000
-
-# Open iflow UI in browser
-iflow:
-	@echo "↓ Opening iflow UI..."
-	open http://localhost:3001
-
-# Open Sugar UI in browser
-sugar:
-	@echo "↓ Opening Sugar UI..."
-	open http://localhost:3002
-
-# ╔══════════════════════════════════════════════════════════════════════════════╗
-# SECTION 4: INITIALIZATION (run after installing packages)
-# ╚══════════════════════════════════════════════════════════════════════════════╝
-
-# Initialize Rufflo (run after npm install)
-init-rufflo:
-	@echo "↓ Initializing Rufflo..."
-	cd {{PROJECT_ROOT}}/packages/rufflo && npm install
-	@echo "✓ Rufflo ready"
-
-# Initialize Letta (non-interactive)
-init-letta:
-	@echo "↓ Initializing Letta..."
-	{{PYTHON_VENV}}/bin/letta configure --default || true
-	@echo "✓ Letta configured"
-
-# Initialize Sugar (run after npm install)
-init-sugar:
-	@echo "↓ Initializing Sugar..."
-	cd {{PROJECT_ROOT}}/packages/sugar && npm install
-	@echo "✓ Sugar ready"
-
-# Initialize Loki (run after npm install)
-init-loki:
-	@echo "↓ Initializing Loki..."
-	cd {{PROJECT_ROOT}}/packages/loki && npm install
-	@echo "✓ Loki ready"
-
-# Initialize monorepo root
-init-monorepo:
-	@echo "↓ Initializing monorepo root..."
-	cd {{PROJECT_ROOT}} && npm install
-	@echo "✓ Monorepo root ready"
-
-# ╔══════════════════════════════════════════════════════════════════════════════╗
-# SECTION 5: HEALTH & DIAGNOSTICS
-# ╚══════════════════════════════════════════════════════════════════════════════╝
-
-# System health check
+# System diagnostic (runs before dev)
 doctor:
-	@echo "\n┃┃┃ Meta Code Squad — System Doctor ┃┃┃\n"
-	@echo "→ Checking Python venv..."
-	@test -d {{PYTHON_VENV}} && echo "  ✓ venv exists" || echo "  ✗ venv missing (run: just setup)"
-	@echo "→ Checking Python packages..."
-	@{{PYTHON_VENV}}/bin/uv pip list 2>/dev/null | grep -qi letta && echo "  ✓ letta installed" || echo "  ✗ letta missing (run: just _install-letta)"
-	@echo "→ Checking SimpleLLMRouter..."
-	@test -d {{PROJECT_ROOT}}/packages/simplellmrouter && echo "  ✓ simplellmrouter dir exists" || echo "  ✗ simplellmrouter missing — create packages/simplellmrouter"
-	@echo "→ Checking Node packages..."
-	@test -d {{PROJECT_ROOT}}/packages/rufflo/node_modules && echo "  ✓ rufflo deps installed" || echo "  ✗ rufflo deps missing (run: just init-rufflo)"
-	@test -d {{PROJECT_ROOT}}/packages/sugar/node_modules && echo "  ✓ sugar deps installed" || echo "  ✗ sugar deps missing (run: just init-sugar)"
-	@test -d {{PROJECT_ROOT}}/packages/loki/node_modules && echo "  ✓ loki deps installed" || echo "  ✗ loki deps missing (run: just init-loki)"
-	@echo "→ Checking services..."
-	@curl -s http://localhost:{{ROUTER_PORT}}/health > /dev/null && echo "  ✓ SimpleLLMRouter running" || echo "  ✗ SimpleLLMRouter not running (run: just start-router)"
-	@curl -s http://localhost:{{LETTA_PORT}}/health > /dev/null && echo "  ✓ Letta running" || echo "  ✗ Letta not running (run: just start-letta)"
-	@echo "\n✓ Doctor complete\n"
+	@echo "→ Running system diagnostics..."
+	@command -v python3 >/dev/null 2>&1 || echo "⚠ Python3 not found"
+	@command -v uv >/dev/null 2>&1 || echo "⚠ uv not found"
+	@command -v node >/dev/null 2>&1 || echo "⚠ Node.js not found"
+	@command -v pnpm >/dev/null 2>&1 || echo "⚠ pnpm not found"
+	@command -v docker >/dev/null 2>&1 || echo "⚠ Docker not found"
+	@[ -d "{{PYTHON_VENV}}" ] && echo "✓ Python venv exists" || echo "⚠ venv missing"
+	@[ -f ".env" ] && echo "✓ .env exists" || echo "⚠ .env missing (run: just _set-env)"
+	@just _check-letta
+	@just _check-simplellmrouter
+	@echo "✓ Diagnostics complete\n"
 
-# Show current environment variables
-env:
-	@echo "PROJECT_ROOT: {{PROJECT_ROOT}}"
-	@echo "PYTHON_VENV:  {{PYTHON_VENV}}"
-	@echo "ROUTER_PORT:  {{ROUTER_PORT}}"
-	@echo "LETTA_PORT:   {{LETTA_PORT}}"
+# ╔════════════════════════════════════════════════════════════════════════════╗
+# SECTION 3: SERVICE LIFECYCLE
+# ╚════════════════════════════════════════════════════════════════════════════╝
 
-# ╔══════════════════════════════════════════════════════════════════════════════╗
-# SECTION 6: MAINTENANCE & CLEANUP
-# ╚══════════════════════════════════════════════════════════════════════════════╝
+# ┌── simplellmrouter ──────────────────────────────────────────────────────────
 
-# Clean all build artifacts and caches
+# Start simplellmrouter (port {{ROUTER_PORT}})
+start-router:
+	@echo "↓ Starting simplellmrouter on port {{ROUTER_PORT}}..."
+	@just _check-port {{ROUTER_PORT}} "simplellmrouter"
+	#!/usr/bin/env zsh
+	source {{PYTHON_VENV}}/bin/activate
+	cd {{PROJECT_ROOT}}/packages/simplellmrouter
+	python -m simplellmrouter.server --port {{ROUTER_PORT}} > /tmp/simplellmrouter.log 2>&1 &
+	echo $! > /tmp/simplellmrouter.pid
+	echo "✓ Router started (PID: $(cat /tmp/simplellmrouter.pid))"
+
+# Stop simplellmrouter
+stop-router:
+	@echo "↓ Stopping simplellmrouter..."
+	@[ -f /tmp/simplellmrouter.pid ] && kill $(cat /tmp/simplellmrouter.pid) && rm /tmp/simplellmrouter.pid || echo "Not running"
+
+# ┌── letta ────────────────────────────────────────────────────────────────────
+
+# Start letta server (port {{LETTA_PORT}})
+start-letta:
+	@echo "↓ Starting letta server on port {{LETTA_PORT}}..."
+	@just _check-port {{LETTA_PORT}} "letta"
+	#!/usr/bin/env zsh
+	source {{PYTHON_VENV}}/bin/activate
+	letta server --port {{LETTA_PORT}} > /tmp/letta.log 2>&1 &
+	echo $! > /tmp/letta.pid
+	echo "✓ Letta started (PID: $(cat /tmp/letta.pid))"
+
+# Stop letta server
+stop-letta:
+	@echo "↓ Stopping letta..."
+	@[ -f /tmp/letta.pid ] && kill $(cat /tmp/letta.pid) && rm /tmp/letta.pid || echo "Not running"
+
+# ┌── rufflo (Browser Agent UI) ───────────────────────────────────────────────
+
+# Start rufflo dev server
+start-rufflo:
+	@echo "↓ Starting rufflo (Browser Agent UI)..."
+	#!/usr/bin/env zsh
+	cd {{PROJECT_ROOT}}/agents/rufflo
+	pnpm dev > /tmp/rufflo.log 2>&1 &
+	echo $! > /tmp/rufflo.pid
+	echo "✓ Rufflo started (PID: $(cat /tmp/rufflo.pid))"
+
+# Stop rufflo
+stop-rufflo:
+	@echo "↓ Stopping rufflo..."
+	@[ -f /tmp/rufflo.pid ] && kill $(cat /tmp/rufflo.pid) && rm /tmp/rufflo.pid || echo "Not running"
+
+# ┌── sugar (TUI orchestrator) ────────────────────────────────────────────────
+
+# Start sugar TUI
+start-sugar:
+	@echo "↓ Starting sugar (TUI orchestrator)..."
+	#!/usr/bin/env zsh
+	cd {{PROJECT_ROOT}}/agents/sugar
+	pnpm dev > /tmp/sugar.log 2>&1 &
+	echo $! > /tmp/sugar.pid
+	echo "✓ Sugar started (PID: $(cat /tmp/sugar.pid))"
+
+# Stop sugar
+stop-sugar:
+	@echo "↓ Stopping sugar..."
+	@[ -f /tmp/sugar.pid ] && kill $(cat /tmp/sugar.pid) && rm /tmp/sugar.pid || echo "Not running"
+
+# ┌── ALL ──────────────────────────────────────────────────────────────────────
+
+# Stop all running services
+stop-all:
+	just stop-router
+	just stop-letta
+	just stop-rufflo
+	just stop-sugar
+	@echo "✓ All services stopped"
+
+# Restart everything
+restart:
+	just stop-all
+	sleep 2
+	just dev
+
+# ╔════════════════════════════════════════════════════════════════════════════╗
+# SECTION 4: AGENT INITIALIZATION (run once per agent)
+# ╚════════════════════════════════════════════════════════════════════════════╝
+
+# Initialize rufflo agent
+init-rufflo:
+	@echo "↓ Initializing rufflo..."
+	cd {{PROJECT_ROOT}}/agents/rufflo && pnpm install
+	@echo "✓ Rufflo initialized"
+
+# Initialize letta agent (non-interactive)
+init-letta:
+	@echo "↓ Initializing letta..."
+	#!/usr/bin/env zsh
+	source {{PYTHON_VENV}}/bin/activate
+	letta configure --default || true
+	@echo "✓ Letta initialized"
+
+# Initialize sugar TUI
+init-sugar:
+	@echo "↓ Initializing sugar..."
+	cd {{PROJECT_ROOT}}/agents/sugar && pnpm install
+	@echo "✓ Sugar initialized"
+
+# Initialize loki (logs aggregator)
+init-loki:
+	@echo "↓ Initializing loki..."
+	cd {{PROJECT_ROOT}}/agents/loki && pnpm install
+	@echo "✓ Loki initialized"
+
+# Initialize monorepo root dependencies
+init-monorepo:
+	@echo "↓ Installing root dependencies..."
+	cd {{PROJECT_ROOT}} && pnpm install
+	@echo "✓ Monorepo root initialized"
+
+# ╔════════════════════════════════════════════════════════════════════════════╗
+# SECTION 5: DEVELOPMENT HELPERS
+# ╚════════════════════════════════════════════════════════════════════════════╝
+
+# Run all linters/formatters
+lint:
+	@echo "↓ Running linters..."
+	cd {{PROJECT_ROOT}} && pnpm lint
+	@echo "✓ Lint complete"
+
+# Format code
+fmt:
+	cd {{PROJECT_ROOT}} && pnpm format
+	@echo "✓ Format complete"
+
+# Run tests
+test:
+	@echo "↓ Running tests..."
+	cd {{PROJECT_ROOT}} && pnpm test
+	@echo "✓ Tests complete"
+
+# Clean build artifacts
 clean:
 	@echo "↓ Cleaning build artifacts..."
 	find {{PROJECT_ROOT}} -type d -name "node_modules" -prune -exec rm -rf {} \;
+	find {{PROJECT_ROOT}} -type d -name "dist" -prune -exec rm -rf {} \;
+	find {{PROJECT_ROOT}} -type d -name ".turbo" -prune -exec rm -rf {} \;
 	find {{PROJECT_ROOT}} -type d -name "__pycache__" -prune -exec rm -rf {} \;
-	find {{PROJECT_ROOT}} -type d -name ".pytest_cache" -prune -exec rm -rf {} \;
-	find {{PROJECT_ROOT}} -type d -name ".ruff_cache" -prune -exec rm -rf {} \;
-	find {{PROJECT_ROOT}} -type f -name "*.pyc" -delete
 	@echo "✓ Clean complete"
 
-# Nuclear option: clean + remove venv
-nuke:
-	just clean
-	@echo "↓ Removing Python venv..."
-	rm -rf {{PYTHON_VENV}}
-	@echo "✓ Nuked. Run 'just setup' to rebuild."
+# View logs for a service (usage: just logs <service>)
+logs service:
+	@tail -f /tmp/{{service}}.log
 
-# ╔══════════════════════════════════════════════════════════════════════════════╗
-# SECTION 7: PRIVATE HELPERS (prefixed with _)
-# ╚══════════════════════════════════════════════════════════════════════════════╝
+# ╔════════════════════════════════════════════════════════════════════════════╗
+# SECTION 6: PRIVATE HELPERS (prefixed with _)
+# ╚════════════════════════════════════════════════════════════════════════════╝
 
-# Check for required system tools
+# Check system prerequisites
 _check-prereqs:
 	@echo "→ Checking prerequisites..."
-	@command -v python3 >/dev/null 2>&1 || { echo "✗ python3 not found"; exit 1; }
-	@command -v uv >/dev/null 2>&1 || { echo "✗ uv not found — install with: curl -LsSf https://astral.sh/uv/install.sh | sh"; exit 1; }
-	@command -v npm >/dev/null 2>&1 || { echo "✗ npm not found"; exit 1; }
-	@command -v git >/dev/null 2>&1 || { echo "✗ git not found"; exit 1; }
+	@command -v python3 >/dev/null 2>&1 || (echo "❌ Python3 required" && exit 1)
+	@command -v uv >/dev/null 2>&1 || (echo "❌ uv required — install: curl -LsSf https://astral.sh/uv/install.sh | sh" && exit 1)
+	@command -v node >/dev/null 2>&1 || (echo "❌ Node.js required" && exit 1)
+	@command -v pnpm >/dev/null 2>&1 || (echo "❌ pnpm required" && exit 1)
 	@echo "✓ Prerequisites OK"
 
-# Create Python virtual environment using uv
+# Create Python virtual environment
 _create-venv:
 	@echo "→ Creating Python venv..."
-	@test -d {{PYTHON_VENV}} && echo "  ✓ Virtual environment exists" && exit 0 || true
+	@[ -d "{{PYTHON_VENV}}" ] && echo "  ✓ Virtual environment exists"
 	uv venv {{PYTHON_VENV}}
 	@echo "✓ venv created"
 
-# Install Letta via uv
+# Install letta
 _install-letta:
 	@echo "→ Installing Letta..."
 	uv pip install --python {{PYTHON_VENV}}/bin/python letta
 	@echo "✓ Letta installed"
 
-# Install SimpleLLMRouter from local package (packages/simplellmrouter must exist)
+# Install simplellmrouter from local package
 _install-simplellmrouter:
 	@echo "→ Installing SimpleLLMRouter..."
-	@test -d {{PROJECT_ROOT}}/packages/simplellmrouter || { echo "✗ packages/simplellmrouter not found — create it first"; exit 1; }
+	@[ -d "{{PROJECT_ROOT}}/packages/simplellmrouter" ] || (echo "✗ packages/simplellmrouter not found — create it first" && exit 1)
 	uv pip install --python {{PYTHON_VENV}}/bin/python -e {{PROJECT_ROOT}}/packages/simplellmrouter
 	@echo "✓ SimpleLLMRouter installed"
 
-# Set up .env file
+# Create .env file
 _set-env:
-	@echo "→ Setting up .env..."
-	test -f {{PROJECT_ROOT}}/.env || cp {{PROJECT_ROOT}}/.env.example {{PROJECT_ROOT}}/.env
-	@echo "✓ .env ready"
+	@echo "↓ Creating .env file..."
+	@[ -f ".env" ] && echo "✓ .env already exists" || cp .env.example .env
 
 # Install git hooks
 _install-git-hooks:
-	@echo "→ Installing git hooks..."
+	@echo "↓ Installing git hooks..."
 	mkdir -p {{PROJECT_ROOT}}/.git/hooks
-	echo '#!/usr/bin/env zsh\njust _hook-pre-commit' > {{PROJECT_ROOT}}/.git/hooks/pre-commit
+	echo '#!/bin/sh\njust _hook-pre-commit' > {{PROJECT_ROOT}}/.git/hooks/pre-commit
 	chmod +x {{PROJECT_ROOT}}/.git/hooks/pre-commit
 	@echo "✓ Git hooks installed"
 
-# Hook: on session start
-_hook-session-start:
-	@echo "[HOOK] Session started"
+# Check if port is available
+_check-port port service:
+	@lsof -ti:{{port}} >/dev/null 2>&1 && echo "⚠ Port {{port}} ({{service}}) already in use" || true
 
-# Hook: on task dispatch
-_hook-task-dispatch:
-	@echo "[HOOK] Task dispatched"
+# Status checkers
+_status-router:
+	@[ -f /tmp/simplellmrouter.pid ] && echo "✓ Router (PID: $(cat /tmp/simplellmrouter.pid))" || echo "✗ Router not running"
 
-# Hook: on edit
-_hook-on-edit:
-	@echo "[HOOK] File edited"
+_status-letta:
+	@[ -f /tmp/letta.pid ] && echo "✓ Letta (PID: $(cat /tmp/letta.pid))" || echo "✗ Letta not running"
 
-# Hook: on commit
-_hook-on-commit:
-	@echo "[HOOK] Commit triggered"
+_status-rufflo:
+	@[ -f /tmp/rufflo.pid ] && echo "✓ Rufflo (PID: $(cat /tmp/rufflo.pid))" || echo "✗ Rufflo not running"
 
-# Hook: pre-commit
+_status-sugar:
+	@[ -f /tmp/sugar.pid ] && echo "✓ Sugar (PID: $(cat /tmp/sugar.pid))" || echo "✗ Sugar not running"
+
+# Doctor checkers
+_check-letta:
+	@{{PYTHON_VENV}}/bin/letta --version >/dev/null 2>&1 && echo "✓ letta installed" || echo "⚠ letta not installed (run: just _install-letta)"
+
+_check-simplellmrouter:
+	@[ -d "{{PROJECT_ROOT}}/packages/simplellmrouter" ] && echo "✓ simplellmrouter package exists" || echo "⚠ packages/simplellmrouter missing"
+
+# Git hook: pre-commit
 _hook-pre-commit:
-	@echo "[HOOK] Running pre-commit checks..."
-	{{PYTHON_VENV}}/bin/ruff check {{PROJECT_ROOT}}/packages
-	@echo "[HOOK] Pre-commit complete"
+	@echo "→ Running pre-commit checks..."
+	just lint
+	just test
+	@echo "✓ Pre-commit passed"
+
+# Claude hooks
+_hook-session-start:
+	@echo "→ [HOOK] Session started at $(date)"
+	just doctor
+
+_hook-task-dispatch:
+	@echo "→ [HOOK] Task dispatched at $(date)"
+
+_hook-on-edit:
+	@echo "→ [HOOK] File edited at $(date)"
+
+_hook-on-commit:
+	@echo "→ [HOOK] Commit at $(date)"
+	just lint
