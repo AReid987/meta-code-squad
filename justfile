@@ -272,7 +272,7 @@ _install-simplellmrouter:
 	@echo "→ Installing SimpleLLMRouter..."
 	@[ -d "{{PROJECT_ROOT}}/packages/simplellmrouter" ] || \
 		git clone https://github.com/AReid987/simplellmrouter.git {{PROJECT_ROOT}}/packages/simplellmrouter
-	cd {{PROJECT_ROOT}}/packages/simplellmrouter && pnpm install
+	cd {{PROJECT_ROOT}}/packages/simplellmrouter && npm install
 	@echo "✓ SimpleLLMRouter installed"
 
 # Create .env file
