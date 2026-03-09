@@ -124,8 +124,8 @@ doctor:
 # Initialize Ruflo (run after _install-ruflo)
 init-ruflo:
 	@echo "→ Initializing Ruflo in hive mode..."
-	cd {{PROJECT_ROOT}} && pnpm dlx ruflo@latest init --mode=hive
-	claude mcp add ruflo -- pnpm dlx ruflo@latest mcp start
+	cd {{PROJECT_ROOT}} && pnpm dlx ruflo@latest init --mode=hive --force
+	claude mcp add ruflo -- pnpm dlx ruflo@latest mcp start || true
 	@echo "✓ Ruflo initialized"
 
 # Initialize Letta (run after _install-letta)
@@ -243,12 +243,14 @@ _install-kimi:
 
 # Install SimpleLLMRouter
 _install-simplellmrouter:
-	@echo "→ Installing SimpleLLMRouter..."
-	ROUTER_DIR="{{PROJECT_ROOT}}/../simplellmrouter"; \
-	if [ -d "$$ROUTER_DIR" ]; then \
-		uv pip install --python {{PYTHON_VENV}} -e "$$ROUTER_DIR" && echo "✓ SimpleLLMRouter installed from local source"; \
-	else \
-		echo "⚠ SimpleLLMRouter not found at $$ROUTER_DIR — skipping"; \
+	#!/usr/bin/env bash
+	echo "→ Installing SimpleLLMRouter..."
+	ROUTER_DIR="{{PROJECT_ROOT}}/../simplellmrouter"
+	if [ -d "$ROUTER_DIR" ]; then
+		uv pip install --python {{PYTHON_VENV}} -e "$ROUTER_DIR"
+		echo "✓ SimpleLLMRouter installed from local source"
+	else
+		echo "⚠ SimpleLLMRouter not found at $ROUTER_DIR — skipping"
 	fi
 
 # Create .env file if missing
