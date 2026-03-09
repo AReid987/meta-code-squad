@@ -204,11 +204,30 @@ _install-loki:
     pnpm add -g loki-mode
     @echo "✓ Loki installed"
 
-# Install Sugar CLI
+# Install Sugar CLI (pre-built binary – avoids indicatif/console compile errors)
 _install-sugar:
-    @echo "→ Installing Sugar CLI..."
-    cargo install sugar-cli
-    @echo "✓ Sugar installed"
+    #!/usr/bin/env bash
+    set -euo pipefail
+    echo "→ Installing Sugar CLI (pre-built binary)..."
+    if command -v sugar > /dev/null 2>&1; then
+        echo "✓ Sugar already installed: $(sugar --version)"; exit 0
+    fi
+    OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+    ARCH=$(uname -m)
+    case "$ARCH" in
+        x86_64) ARCH_LABEL="x64" ;;
+        arm64|aarch64) ARCH_LABEL="arm64" ;;
+        *) echo "✗ Unsupported arch: $ARCH"; exit 1 ;;
+    esac
+    URL="https://github.com/metaplex-foundation/sugar/releases/latest/download/sugar-cli-macOS-latest-${ARCH_LABEL}.tar.gz"
+    echo "  Downloading $URL ..."
+    curl -fsSL "$URL" -o /tmp/sugar-cli.tar.gz
+    tar -xzf /tmp/sugar-cli.tar.gz -C /tmp
+    mkdir -p "$HOME/.cargo/bin"
+    mv /tmp/sugar-cli "$HOME/.cargo/bin/sugar" 2>/dev/null || mv /tmp/sugar "$HOME/.cargo/bin/sugar"
+    chmod +x "$HOME/.cargo/bin/sugar"
+    rm -f /tmp/sugar-cli.tar.gz
+    echo "✓ Sugar installed: $("$HOME/.cargo/bin/sugar" --version)"
 
 # Install Letta
 _install-letta:
