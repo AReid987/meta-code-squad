@@ -28,8 +28,8 @@ setup:
     just _install-agentdb
     just _install-loki
     just _install-sugar
-    just _install-letta
     just _install-kimi
+    just _install-letta
     just _install-simplellmrouter
     just _set-env
     just init-ruflo
@@ -238,14 +238,20 @@ _install-letta:
 # Install Kimi CLI
 _install-kimi:
     @echo "→ Installing Kimi CLI..."
-    uv pip install --python {{PYTHON_VENV}} kimi-cli
+    uv pip install --python {{PYTHON_VENV}} --no-deps kimi-cli
     @echo "✓ Kimi installed"
 
 # Install SimpleLLMRouter
 _install-simplellmrouter:
     @echo "→ Installing SimpleLLMRouter..."
-    uv pip install --python {{PYTHON_VENV}} simplellmrouter
-    @echo "✓ SimpleLLMRouter installed"
+    #!/usr/bin/env zsh
+    ROUTER_DIR="{{PROJECT_ROOT}}/../simplellmrouter"
+    if [[ -d "$ROUTER_DIR" ]]; then
+      uv pip install --python {{PYTHON_VENV}} -e "$ROUTER_DIR"
+      echo "✓ SimpleLLMRouter installed from local source"
+    else
+      echo "⚠ SimpleLLMRouter source not found at $ROUTER_DIR — skipping (clone it to enable)"
+    fi
 
 # Create .env file if missing
 _set-env:
