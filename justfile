@@ -202,6 +202,7 @@ init-loki:
 # Initialize monorepo root dependencies
 init-monorepo:
 	@echo "↓ Installing root dependencies..."
+	@[ -f "{{PROJECT_ROOT}}/package.json" ] || echo '{"name":"meta-code-squad","private":true,"version":"0.0.1"}' > {{PROJECT_ROOT}}/package.json
 	cd {{PROJECT_ROOT}} && pnpm install
 	@echo "✓ Monorepo root initialized"
 
