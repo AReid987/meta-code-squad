@@ -1,0 +1,15 @@
+{
+    "sonarlint.connectedMode.project": {
+        "connectionId": "aigency",
+        "projectKey": "AReid987_meta-code-squad"
+    },
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "agentdb",
+            "group": "ruflo",
+            "database": "${workspaceFolder:meta-code-squad}/agentdb.db"
+        }
+    ]
+}

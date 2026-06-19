@@ -1,0 +1,5 @@
+{
+	"dependencies": {
+		"tmux-ide": "^1.3.1"
+	}
+}

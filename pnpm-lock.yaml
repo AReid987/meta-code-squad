@@ -1,0 +1,39 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      tmux-ide:
+        specifier: ^1.3.1
+        version: 1.3.1
+
+packages:
+
+  argparse@2.0.1:
+    resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
+
+  js-yaml@4.1.1:
+    resolution: {integrity: sha512-qQKT4zQxXl8lLwBtHMWwaTcGfFOZviOJet3Oy/xmGk2gZH677CJM9EvtfdSkgWcATZhj/55JZ0rmy3myCT5lsA==}
+    hasBin: true
+
+  tmux-ide@1.3.1:
+    resolution: {integrity: sha512-ASsOwukOR1Z9OMuJfR5GAqeKJLY76BR8dNYtxrRfU+yF5+hqyq53fVTWM4d48R/U42hvxi4HYhnTSHVdAHtLdA==}
+    engines: {node: '>=18'}
+    hasBin: true
+
+snapshots:
+
+  argparse@2.0.1: {}
+
+  js-yaml@4.1.1:
+    dependencies:
+      argparse: 2.0.1
+
+  tmux-ide@1.3.1:
+    dependencies:
+      js-yaml: 4.1.1

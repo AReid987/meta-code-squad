@@ -179,7 +179,8 @@ restart:
 init-rufflo:
 	@echo "↓ Initializing rufflo..."
 	mkdir -p {{PROJECT_ROOT}}/agents/rufflo
-	@echo "✓ Rufflo directory ready (scaffold manually when needed)"
+	cd {{PROJECT_ROOT}}/agents/rufflo && pnpm install || true
+	@echo "✓ Rufflo directory ready (initialized if package present)"
 
 # Initialize letta agent (non-interactive)
 init-letta:

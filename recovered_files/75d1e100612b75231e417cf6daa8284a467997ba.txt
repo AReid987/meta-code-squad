@@ -1,0 +1,252 @@
+# Meta Code Squad
+
+'##::::'##:'########:'########::::'###::::::::'######:::'#######::'########::'########:
+ ###::'###: ##.....::... ##..::::'## ##::::::'##... ##:'##.... ##: ##.... ##: ##.....::
+ ####'####: ##:::::::::: ##:::::'##:. ##::::: ##:::..:: ##:::: ##: ##:::: ##: ##:::::::
+ ## ### ##: ######:::::: ##::::'##:::. ##:::: ##::::::: ##:::: ##: ##:::: ##: ######:::
+ ##. #: ##: ##...::::::: ##:::: #########:::: ##::::::: ##:::: ##: ##:::: ##: ##...::::
+ ##:.:: ##: ##:::::::::: ##:::: ##.... ##:::: ##::: ##: ##:::: ##: ##:::: ##: ##:::::::
+ ##:::: ##: ########:::: ##:::: ##:::: ##::::. ######::. #######:: ########:: ########:
+..:::::..::........:::::..:::::..:::::..::::::......::::.......:::........:::........::
+
+
+
+> The autonomous development team that builds itself — and everything else.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Node](https://img.shields.io/badge/Node-20%2B-339933?logo=node.js)](https://nodejs.org)
+[![Python](https://img.shields.io/badge/Python-3.12%2B-3776AB?logo=python)](https://python.org)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-Ready-7C3AED)](https://claude.ai)
+
+---
+
+## What It Is
+
+Meta Code Squad is a **multi-agent autonomous development system** — the engine that powers all Aigency products. It orchestrates specialized AI coding agents to plan, build, test, and ship software with minimal human intervention.
+
+**Core capabilities:**
+
+- **Self-orchestrating** — Agents coordinate via Ruflo's queen/worker topology
+- **Quota-proof** — SimpleLLMRouter v2 distributes across 8+ free-tier providers (~1B tokens/month)
+- **Memory-persistent** — Letta + Ruflo AgentDB preserve context across sessions
+- **Quality-gated** — forge-quality enforces lint, typecheck, security, and coverage at commit time
+- **24/7 capable** — Sugar AI task queue + Loki Mode enable overnight autonomous builds
+
+---
+
+## Architecture Overview
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                     LAYER 0: QUOTA & ROUTING                        │
+│                     SimpleLLMRouter v2                              │
+│  ~1B free tokens/month | sub-100ms routing | 3-layer semantic cache │
+└────────────────────────────┬────────────────────────────────────────┘
+                             │
+┌────────────────────────────▼────────────────────────────────────────┐
+│                     LAYER 1: MEMORY & PERSISTENCE                   │
+│            Ruflo (claude-flow v3.5) + Letta Code                    │
+│  AgentDB v3 | HNSW vectors | SONA learning | Context Autopilot      │
+└────────────────────────────┬────────────────────────────────────────┘
+                             │
+┌────────────────────────────▼────────────────────────────────────────┐
+│                     LAYER 2: ORCHESTRATION                          │
+│         GSD + Loki Mode + Sugar AI + Claude Agent Teams             │
+│  RARV cycle | 9 quality gates | 24/7 task queue | parallel agents   │
+└────────────────────────────┬────────────────────────────────────────┘
+                             │
+┌────────────────────────────▼────────────────────────────────────────┐
+│                     LAYER 3: EXECUTION AGENTS                       │
+│  Claude Code (complex) | Gemini CLI (throughput) | Kimi (review)    │
+│  iFlow (scaffold/qa) | Qwen (volume) | Rovo (issue-driven)          │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Agent Ecosystem
+
+| Agent | Role | Best For |
+|-------|------|----------|
+| **Ruflo** | Orchestrator | Planning, coordination, swarm management |
+| **Gemini CLI** | Primary throughput | GSD, tests, config, boilerplate, docs |
+| **Claude Code** | Complex logic | State machines, security, architecture |
+| **Kimi Code CLI** | Review | 128K context full-codebase sweeps |
+| **iFlow CLI** | Utilities | `/scaffold`, `/qa`, `/refactor`, `/mermaid` |
+| **Letta Code** | Memory | Persistent codebase context, `/init deep` |
+
+**Routing flow:**
+```
+New feature → Ruflo plans → Gemini designs → Kimi implements → iFlow reviews
+Bug fix     → Ruflo triages → Kimi patches → iFlow validates
+Architecture → Gemini leads → Ruflo coordinates → all agents input
+```
+
+---
+
+## Monorepo Structure
+
+```
+meta-code-squad/
+├── packages/
+│   ├── llm-router/       # SimpleLLMRouter v2 (TypeScript + Python TUI)
+│   ├── forge-quality/    # Code quality enforcer (git hooks, linting)
+│   └── lp-gen/           # Landing page generator
+├── apps/                 # Deployable applications (Phase 2+)
+├── docs/                 # Full system documentation
+├── .github/              # CI/CD workflows, templates
+├── AGENTS.md             # Agent constitution (read first)
+├── CLAUDE.md             # Claude Code instructions
+├── GEMINI.md             # Gemini CLI instructions
+└── justfile              # All runnable commands
+```
+
+---
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js 20+
+- Python 3.12+
+- `just` (task runner)
+
+```bash
+# Install just (one time)
+brew install just          # macOS
+# or: cargo install just   # Linux/Windows
+```
+
+### Setup
+
+```bash
+git clone git@github.com:AReid987/meta-code-squad.git
+cd meta-code-squad
+just setup   # One-time: installs all tools, wires services
+just dev     # Start everything for a work session
+```
+
+### First Session
+
+```bash
+# In Claude Code:
+/init deep              # Letta indexes the codebase (~10 min, once)
+
+# Generate first plan:
+/gsd:new-project        # Creates PROJECT.md, REQUIREMENTS.md, ROADMAP.md
+/gsd:plan-phase 1       # Generates PLAN-1.md
+
+# Execute autonomously:
+just run PLAN-1.md      # Loki consumes plan, RARV cycle begins
+```
+
+---
+
+## Key Commands
+
+| Command | Purpose |
+|---------|---------|
+| `just setup` | One-time full installation |
+| `just dev` | Start router + daemon for dev session |
+| `just doctor` | Health check all systems |
+| `just test` | Run tests across all packages |
+| `just lint` | Lint all packages |
+| `just run PLAN.md` | Execute a GSD plan through Loki |
+
+---
+
+## Packages
+
+### `packages/llm-router` — SimpleLLMRouter v2
+
+Intelligent LLM routing gateway with:
+- **14-dimension complexity classifier** — routes to optimal model
+- **3-layer semantic cache** — 30-60% token savings
+- **Circuit breaker + quota tracking** — never hit limits
+- **Textual TUI** — 9 screens for real-time monitoring
+
+### `packages/forge-quality` — Code Quality Enforcer
+
+Git hook enforcement system:
+- **Pre-commit**: format, lint, typecheck, secret scan
+- **Commit-msg**: conventional commits validation
+- **Pre-push**: full test suite, security audit
+- **PR generator**: auto-generate descriptions from commits
+
+### `packages/lp-gen` — Landing Page Generator
+
+Agent-driven landing page builder for Aigency sub-domains.
+
+---
+
+## CI/CD
+
+Automated workflows in `.github/workflows/`:
+
+| Workflow | Trigger | Purpose |
+|----------|---------|---------|
+| `ci.yml` | PR/push to main | Lint, typecheck, test + coverage |
+| `release.yml` | Push to main | Release Please automation |
+| `codeql.yml` | Push + weekly | Security scanning (Python + JS) |
+| `stale.yml` | Weekly | Close inactive issues/PRs |
+
+---
+
+## Documentation
+
+Full specs in `docs/`:
+
+| Document | Purpose |
+|----------|---------|
+| `meta-code-squad-master-system-spec.md` | Single source of truth |
+| `ruflo-master-integration-guide.md` | Ruflo setup & integration |
+| `meta-code-squad-tool-inventory.md` | All CLI tools & quotas |
+| `simplellmrouter-v2-spec.md` | Router implementation spec |
+| `architecture-aigency-dev-platform.md` | System architecture |
+| `prd-aigency-dev-platform.md` | Product requirements |
+
+---
+
+## Tech Stack
+
+| Layer | Technologies |
+|-------|-------------|
+| **Orchestration** | Ruflo (claude-flow), ruflow pipelines |
+| **LLM Router** | TypeScript, Hono, SQLite, hnswlib-node |
+| **Memory** | Letta, AgentDB v3, RVF vectors |
+| **Runtime** | Python 3.12+ (uv), Node 20+ (pnpm) |
+| **Build** | Turborepo, just |
+| **Quality** | Ruff, mypy, ESLint, Prettier, Vitest, pytest |
+| **CI** | GitHub Actions, Codecov, CodeQL |
+
+---
+
+## Phase Roadmap
+
+| Phase | Status | Scope |
+|-------|--------|-------|
+| **Phase 1** | In Progress | SimpleLLMRouter v2, forge-quality, squad operational |
+| **Phase 2** | Pending | Aigency Core Platform, Maestra workflows |
+| **Phase 3** | Pending | agor.live canvas, sub-domain landing pages |
+| **Phase 4** | Pending | Project Blackout Chrome extension |
+
+---
+
+## Contributing
+
+1. All agents read `AGENTS.md` before starting any task
+2. Commits follow Conventional Commits (`feat/fix/docs/chore/refactor`)
+3. Never push directly to main — branch + PR required
+4. All PRs require iFlow review before merge
+
+---
+
+## License
+
+MIT License — see [LICENSE](LICENSE) for details.
+
+---
+
+## Activity
+
+![Repobeats](https://repobeats.axiom.co/api/embed/4ad87c297eafcf0cfb019c03aaec352652cf5a93.svg)
