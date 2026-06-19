@@ -1,0 +1,78 @@
+# Changelog
+
+## 0.1.0 (2026-06-19)
+
+
+### Features
+
+* **simplellmrouter:** scaffold minimal package so just setup succeeds ([b1a3a25](https://github.com/AReid987/meta-code-squad/commit/b1a3a256ab6c006bf98d290e9e6be776d3697ee7))
+* **simplellmrouter:** scaffold minimal package so just setup succeeds ([e54ba5f](https://github.com/AReid987/meta-code-squad/commit/e54ba5f10627c5c92eaf459ddab97dce1296d483))
+* **simplellmrouter:** scaffold minimal package so just setup succeeds ([eb91219](https://github.com/AReid987/meta-code-squad/commit/eb91219540ac4f85795a1020590c210cba651314))
+
+
+### Bug Fixes
+
+* correct claude-flow npm package name (not scoped under [@anthropic-ai](https://github.com/anthropic-ai)) ([f7035b2](https://github.com/AReid987/meta-code-squad/commit/f7035b27902d6f72229e32bd58825d2858a46fd9))
+* correct kimi CLI install — use uv tool install or curl, not npm (no npm package exists) ([4f78ead](https://github.com/AReid987/meta-code-squad/commit/4f78eade8bef68ddee3d7e95fe2f88cea0ee4c71))
+* fix init-sugar, init-loki, init-letta recipes — no agents/ dir yet ([624d31c](https://github.com/AReid987/meta-code-squad/commit/624d31c0668bc2389d12aafb80842ee6e0455584))
+* init-letta — PYTHON_VENV_DIR -&gt; PYTHON_VENV (typo) ([2c079ce](https://github.com/AReid987/meta-code-squad/commit/2c079cedbf1d52c37cfb462a986016b91d6d382b))
+* init-letta — replace nonexistent quickstart with version check + instructions ([e070f02](https://github.com/AReid987/meta-code-squad/commit/e070f02938a1fcfb81b2218cb2d40aa4f3091845))
+* init-monorepo creates package.json if missing ([c937154](https://github.com/AReid987/meta-code-squad/commit/c937154e49ad726d19c187a8c023c603f0c6655e))
+* init-rufflo — skip pnpm install, directory scaffold only ([3f5341c](https://github.com/AReid987/meta-code-squad/commit/3f5341ccf68ff970ccf5dd9d02aec5fdee1dfccb))
+* init-rufflo mkdir-p guard (no package.json yet) ([7ae38b0](https://github.com/AReid987/meta-code-squad/commit/7ae38b0aa145858762e85dc5ef0a9bf26f2e3f51))
+* install agentdb as global before running install --full ([89ee27d](https://github.com/AReid987/meta-code-squad/commit/89ee27dda940a215f33176c7e56b578603be72cc))
+* install simplellmrouter with pnpm not uv (TS package) ([497e361](https://github.com/AReid987/meta-code-squad/commit/497e36186463e3e5709e62b5736c87de43f95c15))
+* **justfile:** clone simplellmrouter into packages/simplellmrouter ([6775a7c](https://github.com/AReid987/meta-code-squad/commit/6775a7cf38864c0b6a3e3ca9be16f1a9146b3eec))
+* **justfile:** clone simplellmrouter repo into packages/ instead of failing ([da8ecfd](https://github.com/AReid987/meta-code-squad/commit/da8ecfdf2bb83a30350a7b1ee56eb6abaf37413c))
+* **justfile:** patch simplellmrouter pnpm-workspace.yaml before install (add packages field if missing) ([fb8c382](https://github.com/AReid987/meta-code-squad/commit/fb8c38249e9d67ca4c743a59cede8f434aef1ec9))
+* **justfile:** pnpm install --ignore-workspace for simplellmrouter (workspace yaml has no packages field) ([eeac56f](https://github.com/AReid987/meta-code-squad/commit/eeac56f966542a099a8ac38d6fd910b2d07e31fb))
+* **justfile:** replace all pip install with uv pip install; cargo for sugar-cli ([8444e78](https://github.com/AReid987/meta-code-squad/commit/8444e78eb5169c538a030efc196964356a74ac06))
+* **justfile:** replace heredocs with printf, uv pip install, uv venv, non-interactive init-letta ([c8f211f](https://github.com/AReid987/meta-code-squad/commit/c8f211f33f7e02db7601fa9ba25071f64d68a89f))
+* **justfile:** replace nonexistent agentdb install --full with agentdb init --backend auto ([9e30d67](https://github.com/AReid987/meta-code-squad/commit/9e30d67ff74ade377ddf04798b4c2974744c9594))
+* **justfile:** replace pip with uv pip, add _check-letta/_check-simplellmrouter to doctor, make init-letta non-interactive ([999b0e7](https://github.com/AReid987/meta-code-squad/commit/999b0e718ad4265dbdf4ec7acb1f9d4581b7d63f))
+* **justfile:** restore full file + use cargo install for sugar-cli ([f7b1e5a](https://github.com/AReid987/meta-code-squad/commit/f7b1e5a34feb3aa17d0e5d04ce9abd1b851009f8))
+* **justfile:** use cargo install for sugar-cli (Rust binary, not pip) ([fa5e7f0](https://github.com/AReid987/meta-code-squad/commit/fa5e7f0439b3f4b9011d3eb2d25b34daef5ac58d))
+* **justfile:** use npm install for simplellmrouter (plain package, not pnpm workspace) ([f713d43](https://github.com/AReid987/meta-code-squad/commit/f713d43cba9e32920519bf6dcaab85ec190af5a0))
+* **justfile:** uv throughout, correct simplellmrouter path to packages/, non-interactive letta init ([79a84cd](https://github.com/AReid987/meta-code-squad/commit/79a84cd1c5edf79612abf6fd9d1ecc48ca6b6816))
+* **justfile:** uv venv/pip throughout, remove bad clones, non-interactive letta init ([1874ab7](https://github.com/AReid987/meta-code-squad/commit/1874ab7d6e2d7ec2ec4ed7cf4800b97c5ce22004))
+* migrate all python tool invocations to pdm run, add pdm to prereqs checks ([40011b2](https://github.com/AReid987/meta-code-squad/commit/40011b2fd9a618a0d1a6baa7342a87fd933b79ae))
+* pin venv to Python 3.12, fix _set-env .env creation ([49a1c0c](https://github.com/AReid987/meta-code-squad/commit/49a1c0c7bb403bc90b238639b5031602bd1aae9f))
+* remove @ from ROUTER_DIR assignment, use uv run for letta in init-letta ([eba0f95](https://github.com/AReid987/meta-code-squad/commit/eba0f9573cc1a78459f0bf00930ff6f5f8ff6efc))
+* remove stale [@anthropic-ai](https://github.com/anthropic-ai) scope from MCP registration command ([4d8c9ff](https://github.com/AReid987/meta-code-squad/commit/4d8c9ffc37e7cfc58061bfb13a3fe498797058e4))
+* replace _install-sugar cargo compile with pre-built binary download ([6c7a3d6](https://github.com/AReid987/meta-code-squad/commit/6c7a3d68cb2b245301fcaa9a4dacbaf369d2e405))
+* replace all npm/npx with pnpm/pnpm dlx throughout justfile ([58e2578](https://github.com/AReid987/meta-code-squad/commit/58e2578d2a9b0dd10500290a54fa2f9e53fa2545))
+* replace all space indentation with tabs in justfile (just requires tabs) ([6279e0d](https://github.com/AReid987/meta-code-squad/commit/6279e0d8e803be4948246aec1cbbb6b6328e52c9))
+* replace cargo-compiled sugar-cli with pre-built binary download ([23f4da0](https://github.com/AReid987/meta-code-squad/commit/23f4da02e46b878eaf691552f7b6b262129b412b))
+* restore justfile plaintext (was accidentally pushed as base64) ([74a2a03](https://github.com/AReid987/meta-code-squad/commit/74a2a033f2e81acba8f756410fe2aa0a3b8ed56d))
+* rewrite _install-simplellmrouter as single-line shell (no shebang block) ([946e7e0](https://github.com/AReid987/meta-code-squad/commit/946e7e048bc9da7b0bd84f1135ab9e3172de3046))
+* shebang recipe for simplellmrouter, --force + || true for init-ruflo ([6b992a9](https://github.com/AReid987/meta-code-squad/commit/6b992a9436b3329ad04dfb3363952ff3e2da9ef5))
+* skip simplellmrouter if not local, fix kimi dep conflicts with --no-deps + install order ([3546bbe](https://github.com/AReid987/meta-code-squad/commit/3546bbe7fd807a14739ef98edc6a98d4a1c8619e))
+* start-router uses pnpm dev (TS server), both run foreground ([b983da2](https://github.com/AReid987/meta-code-squad/commit/b983da28bb0ef892f65cc205fc6cefb611110195))
+* use correct ruflo npm package name (was claude-flow, package is now ruflo) ([5e1a04e](https://github.com/AReid987/meta-code-squad/commit/5e1a04e7696c0f4032f73afa354eb2edfd37d890))
+
+
+### Documentation
+
+* add 4 missing docs to complete 17-file manifest ([d67a92a](https://github.com/AReid987/meta-code-squad/commit/d67a92ac81040d362b39b43ab9bb43bad85b2aac))
+* add 4 missing docs to complete 17-file manifest ([43eb555](https://github.com/AReid987/meta-code-squad/commit/43eb555797526dac16f1d759755cd9a66aad058c))
+* add 4 missing docs to complete 17-file manifest ([dff1fe2](https://github.com/AReid987/meta-code-squad/commit/dff1fe277253eec20234ccb29545de1863064e6c))
+* add 4 missing docs to complete 17-file manifest ([ffff708](https://github.com/AReid987/meta-code-squad/commit/ffff708064f7244df544869253e644a878b4d936))
+* add constitution files and platform specs ([1ed296c](https://github.com/AReid987/meta-code-squad/commit/1ed296c33e9a875f60b40f8b5e4a51947e4f009d))
+* add constitution files and platform specs ([324e564](https://github.com/AReid987/meta-code-squad/commit/324e564b8a095c236af1a6e6d8d3861c8717c0d8))
+* add constitution files and platform specs ([204bebc](https://github.com/AReid987/meta-code-squad/commit/204bebc569109386ed955e0ea1dad9ccc5949bb3))
+* add constitution files and platform specs ([b21b94e](https://github.com/AReid987/meta-code-squad/commit/b21b94ea7c4e3fff29fbd0c809845d711fc10722))
+* add constitution files and platform specs ([37ceb09](https://github.com/AReid987/meta-code-squad/commit/37ceb094c4d3de0da95df23a7729fa8de127e0f5))
+* add constitution files and platform specs ([a8fc896](https://github.com/AReid987/meta-code-squad/commit/a8fc89656e3c75f360e5a4e47e6012fefcea4c13))
+* add constitution files and platform specs ([9b7c456](https://github.com/AReid987/meta-code-squad/commit/9b7c456cd81a4b60d506308d3f236857e0267416))
+* add constitution files and platform specs ([6d8985e](https://github.com/AReid987/meta-code-squad/commit/6d8985e66534c1556b4d150a0bfe38eb9ecc75b1))
+* add system documentation — master spec, ruflo guide, tool inventory, launch guide, execution plan, CLAUDE.md, justfile ([fa70008](https://github.com/AReid987/meta-code-squad/commit/fa700084fc177c93c7f863f9e700da1547470d16))
+* add system documentation — master spec, ruflo guide, tool inventory, launch guide, execution plan, CLAUDE.md, justfile ([ca84e3e](https://github.com/AReid987/meta-code-squad/commit/ca84e3ecebd80c431d28e3c0d9dc6e073f879a9c))
+* add system documentation — master spec, ruflo guide, tool inventory, launch guide, execution plan, CLAUDE.md, justfile ([c2cbf54](https://github.com/AReid987/meta-code-squad/commit/c2cbf54d51fa57ff51ccce80ae0026118b6acf65))
+* add system documentation — master spec, ruflo guide, tool inventory, launch guide, execution plan, CLAUDE.md, justfile ([cebba1b](https://github.com/AReid987/meta-code-squad/commit/cebba1b4bd14b8fefb4f34612058de25d8990c27))
+* add system documentation — master spec, ruflo guide, tool inventory, launch guide, execution plan, CLAUDE.md, justfile ([6ef314f](https://github.com/AReid987/meta-code-squad/commit/6ef314f253e32da4b1b60f142adb4303d1ae22d2))
+* add system documentation — master spec, ruflo guide, tool inventory, launch guide, execution plan, CLAUDE.md, justfile ([5d8fd9c](https://github.com/AReid987/meta-code-squad/commit/5d8fd9c01c40766d492bc8f66a7eb4f5ca5575b9))
+* add system documentation — master spec, ruflo guide, tool inventory, launch guide, execution plan, CLAUDE.md, justfile ([c865b0f](https://github.com/AReid987/meta-code-squad/commit/c865b0f6ce036ad29cd7a9c19a47c92df524362e))
+* add system documentation — master spec, ruflo guide, tool inventory, launch guide, execution plan, CLAUDE.md, justfile ([5683d03](https://github.com/AReid987/meta-code-squad/commit/5683d03d60d65c1bc6865ded71a3b7ea14a80331))
+* add system documentation — master spec, ruflo guide, tool inventory, launch guide, execution plan, CLAUDE.md, justfile ([8e62801](https://github.com/AReid987/meta-code-squad/commit/8e628019c3632d0404e50d36bf962bbc5f381864))
+* add system documentation — master spec, ruflo guide, tool inventory, launch guide, execution plan, CLAUDE.md, justfile ([5529f09](https://github.com/AReid987/meta-code-squad/commit/5529f09e20e9db2821b5dc6f896c36966336a2eb))
+* rewrite README with improved structure and content ([0e7250b](https://github.com/AReid987/meta-code-squad/commit/0e7250b08b4533d808c8eca85ab440d68925768f))
